@@ -22,6 +22,21 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/app/api/auth/[auth]/route.js",
+    "src/app/profile/page.jsx",
+    "src/lib/auth0.js",
+    "src/middle.ware.js",
+    "src/app/layout.jsx",
+    "src/app/layout.jsx",
+    "src/middle.ware.js",
+    "src/middle.ware.js",
+    "src/app/page.sjx",
+    "src/components/Header.jsx"
+  ],
   "exclude": ["node_modules"]
 }
