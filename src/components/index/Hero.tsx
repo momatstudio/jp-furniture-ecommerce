@@ -12,12 +12,15 @@ export default function Hero() {
         style={{ backgroundImage: `url(${slideShow[0].image})` }}
       >
         <div className="flex flex-col justify-center items-center md:items-start text-white py-10 px-4 md:p-10 h-full">
-          <span className="text-5xl font-bold w-full md:w-2/3 leading-[60px] text-center md:text-start">
+          <h1 className="text-5xl font-bold w-full md:w-2/3 leading-[60px] text-center md:text-start pt-10">
             Furniture Designed to Transform
-          </span>
-          <span className="text-xl md:text-[25px] pb-7 text-center md:text-start pt-10">
+          </h1>
+          <div
+            className="text-xl md:text-[20px] pb-7 text-center md:text-start pt-10"
+            style={{ letterSpacing: 1.5 }}
+          >
             View our extensive collection of luxury furniture
-          </span>
+          </div>
           <Link href="/shop">
             <Button name="SHOP NOW" />
           </Link>

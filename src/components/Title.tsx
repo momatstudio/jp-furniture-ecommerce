@@ -9,7 +9,7 @@ interface TitleProps {
 export default function Title({ name, description }: TitleProps) {
   return (
     <div className="py-4">
-      <h1>{name}</h1>
+      <h2 className="pt-5">{name}</h2>
 
       <div className="flex justify-between items-center">
         <span>{description}</span>

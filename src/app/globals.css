@@ -3,7 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --font-inter: "Inter", Arial, Helvetica, sans-serif;
+  --font-inter: var(--font-poppins);
 }
 
 @theme inline {
@@ -42,6 +42,21 @@ body {
 }
 
 h1 {
-  font-family: 700;
-  font-size: 35px;
+  font-family: 500;
+  font-size: 55px;
+  letter-spacing: 2px;
+}
+h2 {
+  /* font-family: 500; */
+  font-size: 40px;
+  letter-spacing: 2px;
+}
+
+span,
+a,
+li,
+p {
+  font-weight: 300;
+  font-size: 15px;
+  letter-spacing: 1.5px;
 }

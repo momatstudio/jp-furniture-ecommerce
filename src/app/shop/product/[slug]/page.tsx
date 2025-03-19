@@ -6,8 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
-import { FaCreditCard, FaMoneyBillWave } from "react-icons/fa";
-import { BsCashCoin } from "react-icons/bs";
 
 export default function ProductPage({ params }: { params: { slug: string } }) {
   const [quantity, setQuantity] = useState(1);
@@ -51,9 +49,9 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
           </div>
 
           <div className="w-full md:w-1/2 space-y-4">
-            <h1 className="text-3xl font-semibold">{product.name}</h1>
-            <p className="text-2xl font-medium">R{product.price}</p>
-            <p className="text-gray-600">{product.description}</p>
+            <h1 className="text-2xl font-semibold">{product.name}</h1>
+            <div className="text-2xl font-medium">R{product.price}</div>
+            <p>{product.description}</p>
 
             <div className="space-y-4">
               <div className="flex items-center gap-4">
@@ -74,13 +72,13 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
 
               <div className="flex gap-4">
                 <button
-                  className="flex-1 bg-black text-white py-3 rounded-md hover:bg-gray-800 transition"
+                  className="flex-1 bg-black text-white py-2  hover:bg-gray-800 transition"
                   onClick={() => addToCart(product, quantity)}
                 >
                   Add to Cart
                 </button>
                 <button
-                  className="flex-1 bg-green-600 text-white py-3 rounded-md hover:bg-green-500 transition"
+                  className="flex-1 bg-[#A42300] text-white py-2  hover:bg-[#a42400ec] transition"
                   onClick={() => {
                     addToCart(product, quantity);
                     router.push("/checkout");
@@ -94,29 +92,39 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
         </div>
 
         {/* Product Details Section */}
-        <div className="mt-12 max-w-6xl mx-auto">
+        <div className="mt-12 max-w-6xl mx-auto px-4 md:px-0">
           <div className="space-y-4">
-            <div className="flex justify-between gap-4">
+            <div className="flex flex-col md:flex-row justify-between gap-4">
               {Object.keys(product.features).map((feature) => (
-                <button
-                  key={feature}
-                  className={`p-4 text-center flex-1 rounded-t-lg transition-colors
-                    ${
-                      selectedFeature === feature
-                        ? "bg-gray-100 font-medium"
-                        : "hover:bg-gray-50"
-                    }`}
-                  onClick={() =>
-                    setSelectedFeature(feature as keyof typeof product.features)
-                  }
-                >
-                  <h3 className="font-medium">{feature}</h3>
-                </button>
+                <div key={feature} className="flex-1">
+                  <button
+                    className={`p-4 text-center w-full rounded-t-lg transition-colors
+              ${
+                selectedFeature === feature
+                  ? "bg-gray-100 font-medium"
+                  : "hover:bg-gray-50"
+              }`}
+                    onClick={() =>
+                      setSelectedFeature(
+                        feature as keyof typeof product.features
+                      )
+                    }
+                  >
+                    <h3 className="font-medium">{feature}</h3>
+                  </button>
+                  {selectedFeature === feature && (
+                    <div className="bg-gray-100 p-6 animate-fade-in mt-2 md:hidden">
+                      <p className="text-gray-600 text-center">
+                        {product.features[selectedFeature]}
+                      </p>
+                    </div>
+                  )}
+                </div>
               ))}
             </div>
 
             {selectedFeature && (
-              <div className="bg-gray-100 p-6 rounded-lg animate-fade-in">
+              <div className="bg-gray-100 p-6 animate-fade-in hidden md:block">
                 <p className="text-gray-600 text-center">
                   {selectedFeature && product.features[selectedFeature]}
                 </p>

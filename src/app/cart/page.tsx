@@ -19,7 +19,7 @@ export default function CartPage() {
       <>
         <ClientHeader />
         <div className="p-4 md:px-[15%] min-h-[60vh]">
-          <h1 className="text-2xl font-semibold mb-4">Shopping Cart</h1>
+          <h3 className="text-2xl font-semibold mb-4">Shopping Cart</h3>
           <p>
             Your cart is empty.{" "}
             <Link href="/shop" className="text-[#A42300]">
@@ -35,7 +35,7 @@ export default function CartPage() {
     <>
       <ClientHeader />
       <div className="p-4 md:px-[15%]">
-        <h1 className="text-2xl font-semibold mb-4">Shopping Cart</h1>
+        <h2 className="text-2xl font-semibold mb-4">Shopping Cart</h2>
         <div className="flex flex-col lg:flex-row gap-8">
           <div className="lg:w-2/3">
             {items.map((item) => (

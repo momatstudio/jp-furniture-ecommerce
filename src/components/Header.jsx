@@ -9,6 +9,7 @@ import {
   FiPhone,
   FiSearch,
   FiShoppingCart,
+  FiUser,
 } from "react-icons/fi";
 import { companyInfo } from "../../data";
 import { useCart } from "@/context/CartContext";
@@ -35,7 +36,7 @@ export default function Header() {
   return (
     <>
       <div className="flex items-center justify-between h-6 p-4 md:px-[15%] border-t-6 border-[#A42300] bg-white">
-        <div className="flex items-center text-sm font-[300 text-black">
+        <div className="flex items-center font-[200] text-black">
           <FiPhone size={20} className="mr-2" />
           <span>{companyInfo.phone}</span>
         </div>
@@ -48,25 +49,26 @@ export default function Header() {
           </li>
         </ul>
       </div>
-      <div className="flex items-center justify-between h-28 bg-white drop-shadow-sm p-4 md:px-[15%] ">
+      <div className="flex items-center justify-between h-20 bg-white drop-shadow-sm p-4 md:px-[15%] ">
         <Link href="/">
           <Image
             src={"/logo.svg"}
-            height={70 / 0.55}
-            width={143 / 0.55}
+            height={70 / 0.75}
+            width={143 / 0.75}
             alt={"JP Furniture logo"}
-            className="hidden md:flex cursor-pointer"
+            className="flex cursor-pointer"
           />
-          <Image
+          {/* <Image
             src={"/logo.svg"}
             height={70 * 0.16}
             width={1438 * 0.16}
             alt={"JP Furniture logo"}
             className="md:hidden cursor-pointer"
-          />
+          /> */}
         </Link>
 
-        <div className="hidden md:flex items-center p-1.5 border-1 border-[#A42300]">
+        {/* Search box */}
+        {/* <div className="hidden md:flex items-center p-1.5 border-1 border-[#A42300]">
           <form className="flex items-center">
             <input
               type="text"
@@ -77,25 +79,25 @@ export default function Header() {
               <FiSearch />
             </button>
           </form>
-        </div>
+        </div> */}
 
         <ul className="hidden md:flex space-x-4  text-sm font-[300]">
-          <li className="flex items-center h-26 hover:text-[#A42300] cursor-pointer">
+          <li className="flex items-center h-26 hover:text-[#A42300] cursor-pointer hover:underline">
             <Link href="/">Home</Link>
           </li>
-          <li className="flex items-center h-26  hover:text-[#A42300] cursor-pointer">
+          <li className="flex items-center h-26  hover:text-[#A42300] cursor-pointer hover:underline">
             <Link href="/shop">Shop</Link>
           </li>
-          <li className="flex items-center h-26  hover:text-[#A42300] cursor-pointer">
+          <li className="flex items-center h-26  hover:text-[#A42300] cursor-pointer hover:underline">
             <Link href="/about">About</Link>
           </li>
-          <li className="flex items-center h-26  hover:text-[#A42300] cursor-pointer">
+          <li className="flex items-center h-26  hover:text-[#A42300] cursor-pointer hover:underline">
             <Link href="/contact">Contact</Link>
           </li>
-          <li className="flex items-center h-26  hover:text-[#A42300] cursor-pointer">
+          <li className="flex items-center h-26  hover:text-[#A42300] cursor-pointer hover:underline">
             <Link href="/profile">Profile</Link>
           </li>
-          <li className="flex items-center h-26  hover:text-[#A42300] cursor-pointer">
+          <li className="flex items-center h-26  hover:text-[#A42300] cursor-pointer hover:underline">
             <Link href={"/api/auth/logout"}>Logout</Link>
           </li>
         </ul>
@@ -115,12 +117,13 @@ export default function Header() {
             />
           </div>
         ) : (
-          <button
-            className="hidden md:block text-sm font-[300] cursor-pointer text-[#A42300] hover:text-white hover:bg-[#A42300] bg-white border-1 border-[#A42300] px-4 py-2 rounded-md"
+          <div
+            className="hidden md:flex items-center text-sm cursor-pointer  hover:text-white hover:bg-[#A42300] bg-white  border-1 px-4 py-2"
             onClick={() => router.push("/api/auth/login")}
           >
-            Sign in
-          </button>
+            <FiUser className="text-[14px] mx-1" />
+            <span>Sign in</span>
+          </div>
         )}
 
         <div className=" flex items-center text-black cursor-pointer">

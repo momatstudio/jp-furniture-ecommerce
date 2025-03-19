@@ -1,107 +1,194 @@
 "use client";
 import React, { useState } from "react";
 import Header from "@/components/Header";
+import { FaCreditCard, FaMoneyBillWave } from "react-icons/fa";
+import { BsCashCoin } from "react-icons/bs";
+import Link from "next/link";
+import HeaderLite from "@/components/HeaderLite";
 
 export default function OrderSummaryPage() {
   const [paymentMethod, setPaymentMethod] = useState("transfer");
 
   return (
     <>
-      <Header />
-      <div className="max-w-3xl mx-auto px-4 py-8">
-        <h1 className="text-2xl font-bold mb-4">Order Summary & Payment</h1>
-        {/* ...existing order details... */}
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">Order Details</h2>
-          <p>Order #123456</p>
-          <p>Total Amount: R1234</p>
-        </section>
+      <HeaderLite />
+      <div className="bg-gray-50 min-h-screen">
+        <div className="max-w-3xl mx-auto px-4 py-8">
+          {/* Breadcrumb */}
+          <nav className="flex mb-8 text-sm">
+            <Link href="/" className="text-gray-500 hover:text-gray-700">
+              Home
+            </Link>
+            <span className="mx-2 text-gray-500">/</span>
+            <Link href="/cart" className="text-gray-500 hover:text-gray-700">
+              Cart
+            </Link>
+            <span className="mx-2 text-gray-500">/</span>
+            <span className="text-gray-900 font-medium">Order Summary</span>
+          </nav>
 
-        <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-4">Select Payment Method</h2>
-          <div className="flex space-x-4">
+          <div className="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 className="text-2xl font-bold mb-6 text-gray-800">
+              Order Summary & Payment
+            </h2>
+
+            {/* Order Details Section */}
+            <section className="mb-8 border-b pb-6">
+              <h3 className="text-xl font-semibold mb-4 text-gray-700">
+                Order Details
+              </h3>
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-sm text-gray-600">Order Number</p>
+                    <p className="font-medium text-gray-900">#123456</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-600">Total Amount</p>
+                    <p className="font-medium text-gray-900">R1234</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-600">Order Date</p>
+                    <p className="font-medium text-gray-900">
+                      {new Date().toLocaleDateString()}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-600">Status</p>
+                    <p className="font-medium text-green-600">
+                      Pending Payment
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Payment Method Selection */}
+            <section className="mb-8">
+              <h3 className="text-xl font-semibold mb-4 text-gray-700">
+                Select Payment Method
+              </h3>
+              <div className="grid grid-cols-3 gap-4">
+                <button
+                  onClick={() => setPaymentMethod("transfer")}
+                  className={`flex flex-col items-center p-4 rounded-lg border transition-all ${
+                    paymentMethod === "transfer"
+                      ? "border-[#A42300]"
+                      : "border-gray-200 hover:border-[#cb8471]"
+                  }`}
+                >
+                  <FaMoneyBillWave
+                    className={`text-2xl mb-2 ${
+                      paymentMethod === "transfer"
+                        ? "text-[#A42300]"
+                        : "text-gray-400"
+                    }`}
+                  />
+                  <span className="text-sm font-medium">Bank Transfer</span>
+                </button>
+                <button
+                  onClick={() => setPaymentMethod("eft")}
+                  className={`flex flex-col items-center p-4 rounded-lg border transition-all ${
+                    paymentMethod === "eft"
+                      ? "border-[#A42300]"
+                      : "border-gray-200 hover:border-[#cb8471]"
+                  }`}
+                >
+                  <BsCashCoin
+                    className={`text-2xl mb-2 ${
+                      paymentMethod === "eft"
+                        ? "text-[#A42300]"
+                        : "text-gray-400"
+                    }`}
+                  />
+                  <span className="text-sm font-medium">EFT</span>
+                </button>
+                <button
+                  onClick={() => setPaymentMethod("credit")}
+                  className={`flex flex-col items-center p-4 rounded-lg border transition-all ${
+                    paymentMethod === "credit"
+                      ? "border-[#A42300]"
+                      : "border-gray-200 hover:border-[#cb8471]"
+                  }`}
+                >
+                  <FaCreditCard
+                    className={`text-2xl mb-2 ${
+                      paymentMethod === "credit"
+                        ? "text-[#A42300]"
+                        : "text-gray-400"
+                    }`}
+                  />
+                  <span className="text-sm font-medium">Credit Card</span>
+                </button>
+              </div>
+            </section>
+
+            {/* Payment Details Section */}
+            <section className="mb-8">
+              <div className="bg-gray-50 p-6 rounded-lg">
+                {paymentMethod === "credit" ? (
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-medium mb-4 text-gray-700">
+                      Credit Card Details
+                    </h3>
+                    <div className="space-y-4">
+                      <input
+                        type="text"
+                        placeholder="Card Number"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
+                      />
+                      <div className="grid grid-cols-2 gap-4">
+                        <input
+                          type="text"
+                          placeholder="MM/YY"
+                          className="px-4 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
+                        />
+                        <input
+                          type="text"
+                          placeholder="CVV"
+                          className="px-4 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div>
+                    <h3 className="text-lg font-medium mb-4 text-gray-700">
+                      {paymentMethod === "transfer"
+                        ? "Bank Transfer Details"
+                        : "EFT Details"}
+                    </h3>
+                    <div className="space-y-2">
+                      <div className="flex justify-between py-2 border-b border-gray-200">
+                        <span className="text-gray-600">Bank Name</span>
+                        <span className="font-medium">Standard Bank</span>
+                      </div>
+                      <div className="flex justify-between py-2 border-b border-gray-200">
+                        <span className="text-gray-600">Account Holder</span>
+                        <span className="font-medium">JP E-commerce</span>
+                      </div>
+                      <div className="flex justify-between py-2 border-b border-gray-200">
+                        <span className="text-gray-600">Account Number</span>
+                        <span className="font-medium">123456789</span>
+                      </div>
+                      <div className="flex justify-between py-2 border-b border-gray-200">
+                        <span className="text-gray-600">Reference</span>
+                        <span className="font-medium">ORDER-123456</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </section>
+
             <button
-              onClick={() => setPaymentMethod("transfer")}
-              className={
-                paymentMethod === "transfer"
-                  ? "px-4 py-2 bg-[#A42300] text-white rounded"
-                  : "px-4 py-2 bg-gray-200 text-black rounded"
-              }
+              onClick={() => alert("Payment Confirmed!")}
+              className="w-full bg-green-600 text-white py-4 rounded-md hover:bg-green-500 transition-colors font-medium text-lg"
             >
-              Transfer
-            </button>
-            <button
-              onClick={() => setPaymentMethod("eft")}
-              className={
-                paymentMethod === "eft"
-                  ? "px-4 py-2 bg-[#A42300] text-white rounded"
-                  : "px-4 py-2 bg-gray-200 text-black rounded"
-              }
-            >
-              EFT
-            </button>
-            <button
-              onClick={() => setPaymentMethod("credit")}
-              className={
-                paymentMethod === "credit"
-                  ? "px-4 py-2 bg-[#A42300] text-white rounded"
-                  : "px-4 py-2 bg-gray-200 text-black rounded"
-              }
-            >
-              Credit Card
+              Confirm Payment
             </button>
           </div>
-        </section>
-
-        <section className="mb-6">
-          {paymentMethod === "credit" ? (
-            <div>
-              <h3 className="text-lg font-medium mb-2">Credit Card Payment</h3>
-              <form className="space-y-4">
-                <input
-                  type="text"
-                  placeholder="Card Number"
-                  className="w-full border p-2 rounded"
-                />
-                <div className="flex space-x-4">
-                  <input
-                    type="text"
-                    placeholder="Expiry Date"
-                    className="w-1/2 border p-2 rounded"
-                  />
-                  <input
-                    type="text"
-                    placeholder="CVV"
-                    className="w-1/2 border p-2 rounded"
-                  />
-                </div>
-              </form>
-            </div>
-          ) : paymentMethod === "transfer" ? (
-            <div>
-              <h3 className="text-lg font-medium mb-2">
-                Bank Transfer Payment
-              </h3>
-              <p>Please transfer the total amount to:</p>
-              <p>Account Number: 123456789</p>
-              <p>Bank: ABC Bank</p>
-            </div>
-          ) : (
-            <div>
-              <h3 className="text-lg font-medium mb-2">EFT Payment</h3>
-              <p>Please use the following EFT details:</p>
-              <p>Account Number: 987654321</p>
-              <p>Bank: XYZ Bank</p>
-            </div>
-          )}
-        </section>
-
-        <button
-          onClick={() => alert("Payment Successful!")}
-          className="w-full bg-green-600 text-white py-3 rounded-md hover:bg-green-500 transition"
-        >
-          Confirm Payment
-        </button>
+        </div>
       </div>
     </>
   );

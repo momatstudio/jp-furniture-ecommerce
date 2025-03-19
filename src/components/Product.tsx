@@ -17,7 +17,7 @@ export default function Product({ product }: ProductProps) {
   const { addToCart } = useCart();
 
   return (
-    <div className="flex flex-col items-center border-1 bg-white border-[#dedede] hover:border-[#A42300] py-4 font-light cursor-pointer relative h-full">
+    <div className="flex flex-col items-center bg-white border-black border-1 hover:border-[#A42300] py-4 font-light cursor-pointer relative h-full p-4">
       <Image
         alt="product"
         width={250}
@@ -25,8 +25,8 @@ export default function Product({ product }: ProductProps) {
         src={product.image}
         className="object-contain"
       />
-      <span>{product.name}</span>
-      <span className="py-2">R{product.price}</span>
+      <span className="text-center mt-auto">{product.name}</span>
+      <span className="py-2">R{product.price}.00</span>
       <button
         onClick={() => addToCart(product)}
         className="flex items-center border-1 h-[40] px-4 hover:bg-[#A42300] hover:text-white cursor-pointer mt-auto"
