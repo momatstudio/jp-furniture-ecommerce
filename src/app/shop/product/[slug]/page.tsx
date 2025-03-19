@@ -13,12 +13,11 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   const { slug } = params;
   const product = products.find((p) => p.slug === slug);
   const router = useRouter();
-
-  if (!product) return <div>Product not found</div>;
-
   const [selectedFeature, setSelectedFeature] = useState<
     keyof typeof product.features | null
   >(null);
+
+  if (!product) return <div>Product not found</div>;
 
   return (
     <>

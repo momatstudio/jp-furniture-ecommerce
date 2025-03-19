@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import Header from "@/components/Header";
 import { FaCreditCard, FaMoneyBillWave } from "react-icons/fa";
 import { BsCashCoin } from "react-icons/bs";
 import Link from "next/link";

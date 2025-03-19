@@ -1,6 +1,5 @@
 import React from "react";
 import { slideShow } from "../../../data";
-import { FiArrowLeft } from "react-icons/fi";
 import Button from "../Button";
 import Link from "next/link";
 

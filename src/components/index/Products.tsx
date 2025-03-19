@@ -1,9 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { FiArrowRight } from "react-icons/fi";
 import Product from "../Product";
-import Button from "../Button";
 import Title from "../Title";
 import { products } from "../../../data";
 
