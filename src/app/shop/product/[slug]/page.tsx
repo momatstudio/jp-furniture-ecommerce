@@ -7,7 +7,14 @@ import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
 
-export default function ProductPage({ params }: { params: { slug: string } }) {
+interface PageProps {
+  params: {
+    slug: string;
+  };
+  searchParams?: { [key: string]: string | string[] | undefined };
+}
+
+export default function ProductPage({ params }: PageProps) {
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
   const { slug } = params;
