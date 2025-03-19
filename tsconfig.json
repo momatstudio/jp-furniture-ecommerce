@@ -36,7 +36,8 @@
     "src/middle.ware.js",
     "src/middle.ware.js",
     "src/app/page.sjx",
-    "src/components/Header.jsx"
+    "src/components/Header.jsx",
+    "src/app/shop/product/[slug]/page.jsx"
   ],
   "exclude": ["node_modules"]
 }

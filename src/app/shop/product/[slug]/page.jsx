@@ -7,15 +7,13 @@ import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
 
-export default function ProductPage({ params }: { params: { slug: string } }) {
+export default function ProductPage({ params }) {
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
   const { slug } = params;
   const product = products.find((p) => p.slug === slug);
   const router = useRouter();
-  const [selectedFeature, setSelectedFeature] = useState<
-    keyof typeof product.features | null
-  >(null);
+  const [selectedFeature, setSelectedFeature] = useState(null);
 
   if (!product) return <div>Product not found</div>;
 
@@ -103,11 +101,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                   ? "bg-gray-100 font-medium"
                   : "hover:bg-gray-50"
               }`}
-                    onClick={() =>
-                      setSelectedFeature(
-                        feature as keyof typeof product.features
-                      )
-                    }
+                    onClick={() => setSelectedFeature(feature)}
                   >
                     <h3 className="font-medium">{feature}</h3>
                   </button>
