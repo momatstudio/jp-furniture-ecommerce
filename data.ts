@@ -1,7 +1,7 @@
 export const companyInfo = {
   name: "JP Furniture",
   logo: "/logo.svg",
-  phone: "123-456-7890",
+  phone: "+27 76 252 4329",
 };
 
 export const slideShow = [
