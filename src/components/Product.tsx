@@ -29,9 +29,10 @@ export default function Product({ product }: ProductProps) {
       <span className="py-2">R{product.price}.00</span>
       <button
         onClick={() => addToCart(product)}
-        className="flex items-center border-1 h-[40] px-4 hover:bg-[#A42300] hover:text-white cursor-pointer mt-auto"
+        className="flex items-center border-1 border-red-800 h-[40] px-4 hover:bg-[#A42300] hover:text-white cursor-pointer mt-auto"
       >
-        Add to cart <FiArrowRight className="ml-1" />
+        Add to cart{" "}
+        <FiArrowRight className="ml-1 text-red-800 hover:text-white" />
       </button>
     </div>
   );

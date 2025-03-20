@@ -14,7 +14,7 @@ export default function Title({ name, description }: TitleProps) {
       <div className="flex justify-between items-center">
         <span>{description}</span>
         <Link href="/shop" className="hidden md:block">
-          <Button name="SHOP NOW" />
+          <Button name="SHOP NOW" color="#a42300" />
         </Link>
       </div>
     </div>

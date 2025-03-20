@@ -71,7 +71,7 @@ export default function OrderSummaryPage() {
               <div className="grid grid-cols-3 gap-4">
                 <button
                   onClick={() => setPaymentMethod("transfer")}
-                  className={`flex flex-col items-center p-4 rounded-lg border transition-all ${
+                  className={`flex flex-col items-center p-4 border transition-all ${
                     paymentMethod === "transfer"
                       ? "border-[#A42300]"
                       : "border-gray-200 hover:border-[#cb8471]"
@@ -88,7 +88,7 @@ export default function OrderSummaryPage() {
                 </button>
                 <button
                   onClick={() => setPaymentMethod("eft")}
-                  className={`flex flex-col items-center p-4 rounded-lg border transition-all ${
+                  className={`flex flex-col items-center p-4 border transition-all ${
                     paymentMethod === "eft"
                       ? "border-[#A42300]"
                       : "border-gray-200 hover:border-[#cb8471]"
@@ -105,7 +105,7 @@ export default function OrderSummaryPage() {
                 </button>
                 <button
                   onClick={() => setPaymentMethod("credit")}
-                  className={`flex flex-col items-center p-4 rounded-lg border transition-all ${
+                  className={`flex flex-col items-center p-4 border transition-all ${
                     paymentMethod === "credit"
                       ? "border-[#A42300]"
                       : "border-gray-200 hover:border-[#cb8471]"
@@ -183,7 +183,7 @@ export default function OrderSummaryPage() {
 
             <button
               onClick={() => alert("Payment Confirmed!")}
-              className="w-full bg-[#A42300] text-white py-4 rounded-md hover:bg-[#A42400] transition-colors font-medium text-lg cursor-pointer"
+              className="w-full bg-[#A42300] text-white py-4 hover:bg-[#A42400] transition-colors font-medium text-lg cursor-pointer"
             >
               Confirm Payment
             </button>

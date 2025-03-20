@@ -118,7 +118,7 @@ export default function Header() {
           </div>
         ) : (
           <div
-            className="hidden md:flex items-center text-sm cursor-pointer  hover:text-white hover:bg-[#A42300] bg-white  border-1 px-4 py-2"
+            className="hidden md:flex items-center text-sm cursor-pointer  hover:text-white hover:bg-[#A42300] bg-white  border-1 border-red-700 px-4 py-2"
             onClick={() => router.push("/api/auth/login")}
           >
             <FiUser className="text-[14px] mx-1" />
