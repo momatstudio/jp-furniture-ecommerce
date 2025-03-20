@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { FiFacebook, FiInstagram, FiTwitter } from "react-icons/fi";
+import { FiFacebook, FiTwitter } from "react-icons/fi";
 import { BsWhatsapp } from "react-icons/bs";
 
 export default function Footer() {
