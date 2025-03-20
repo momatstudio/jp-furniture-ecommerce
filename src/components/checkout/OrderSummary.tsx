@@ -63,10 +63,10 @@ export default function OrderSummary({
         </div>
 
         <button
-          className={`w-full py-3 rounded-md transition mt-6 ${
+          className={`w-full py-3 rounded-md transition mt-6  ${
             !isFormValid
-              ? "bg-gray-400 cursor-not-allowed opacity-50"
-              : "bg-green-600 hover:bg-green-500"
+              ? "bg-gray-400 cursor-not-allowed opacity-50 "
+              : "bg-[#A42300] hover:bg-[#A42400] cursor-pointer"
           } text-white`}
           onClick={handleSubmit}
           disabled={!isFormValid}

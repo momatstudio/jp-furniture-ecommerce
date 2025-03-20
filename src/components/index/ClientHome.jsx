@@ -2,6 +2,7 @@
 import Header from "@/components/Header";
 import Hero from "@/components/index/Hero";
 import Products from "@/components/index/Products";
+import Footer from "@/components/Footer";
 import { useUser } from "@auth0/nextjs-auth0/client";
 
 export default function ClientHome() {
@@ -29,6 +30,7 @@ export default function ClientHome() {
       <div className="p-4 md:px-[15%]">
         <Products />
       </div>
+      <Footer />
     </>
   );
 }

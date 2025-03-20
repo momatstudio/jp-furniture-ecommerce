@@ -7,6 +7,7 @@ import OrderSummary from "@/components/checkout/OrderSummary";
 import { useCart } from "@/context/CartContext";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Footer from "@/components/Footer";
 
 export default function CheckoutPage() {
   const { cartItems } = useCart();
@@ -103,7 +104,7 @@ export default function CheckoutPage() {
               <h2 className="text-2xl font-medium mb-4">Your cart is empty</h2>
               <Link
                 href="/"
-                className="inline-block bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-500"
+                className="inline-block bg-[#A42300] text-white px-6 py-2 rounded-md hover:bg-[#a42400]"
               >
                 Continue Shopping
               </Link>
@@ -126,6 +127,7 @@ export default function CheckoutPage() {
           )}
         </div>
       </div>
+      <Footer />
     </>
   );
 }

@@ -25,7 +25,7 @@ export const products = [
     features: {
       Features: "High-quality materials with premium wood finishes",
       Benefits: "Ample storage space and organized compartments",
-      DIMENSIONS: "200cm x 180cm x 60cm",
+      Dimensions: "200cm x 180cm x 60cm",
       "Credit Terms": "Flexible payment plans available",
       Delivery: "2-5 business days delivery",
       Returns: "30-day return policy for unused items",
@@ -44,7 +44,7 @@ export const products = [
     features: {
       Features: "Modern design with durable materials",
       Benefits: "Comfortable seating and easy to clean",
-      DIMENSIONS: "180cm x 90cm x 75cm",
+      Dimentions: "180cm x 90cm x 75cm",
       "Credit Terms": "Flexible payment plans available",
       Delivery: "2-5 business days delivery",
       Returns: "30-day return policy for unused items",
@@ -63,7 +63,7 @@ export const products = [
     features: {
       Features: "Elegant design with premium materials",
       Benefits: "Comfortable seating and stylish appearance",
-      DIMENSIONS: "320cm x 180cm x 85cm",
+      Dimensions: "320cm x 180cm x 85cm",
       "Credit Terms": "Flexible payment plans available",
       Delivery: "2-5 business days delivery",
       Returns: "30-day return policy for unused items",
@@ -82,7 +82,7 @@ export const products = [
     features: {
       Features: "High-quality materials with premium finishes",
       Benefits: "Complete set for a cohesive look",
-      DIMENSIONS: "King Size Set",
+      Dimensions: "King Size Set",
       "Credit Terms": "Flexible payment plans available",
       Delivery: "2-5 business days delivery",
       Returns: "30-day return policy for unused items",
@@ -101,7 +101,7 @@ export const products = [
     features: {
       Features: "High-quality materials with premium finishes",
       Benefits: "Complete set for a cohesive look",
-      DIMENSIONS: "King Size Set",
+      Dimensions: "King Size Set",
       "Credit Terms": "Flexible payment plans available",
       Delivery: "2-5 business days delivery",
       Returns: "30-day return policy for unused items",
@@ -120,7 +120,7 @@ export const products = [
     features: {
       Features: "High-quality materials with premium finishes",
       Benefits: "Complete set for a cohesive look",
-      DIMENSIONS: "King Size Set",
+      Dimensions: "King Size Set",
       "Credit Terms": "Flexible payment plans available",
       Delivery: "2-5 business days delivery",
       Returns: "30-day return policy for unused items",

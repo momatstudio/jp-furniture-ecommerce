@@ -17,7 +17,7 @@ export default function Product({ product }: ProductProps) {
   const { addToCart } = useCart();
 
   return (
-    <div className="flex flex-col items-center bg-white border-black border-1 hover:border-[#A42300] py-4 font-light cursor-pointer relative h-full p-4">
+    <div className="flex flex-col items-center bg-white border-[#A42300] border-1 hover:border-red-700 py-4 font-light cursor-pointer relative h-full p-4">
       <Image
         alt="product"
         width={250}

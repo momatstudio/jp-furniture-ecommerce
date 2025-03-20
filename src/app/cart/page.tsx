@@ -1,5 +1,6 @@
 "use client";
 import ClientHeader from "@/components/ClientHeader";
+import Footer from "@/components/Footer";
 import { useCart } from "@/context/CartContext";
 import Image from "next/image";
 import Link from "next/link";
@@ -99,7 +100,7 @@ export default function CartPage() {
               </div>
               <button
                 onClick={() => router.push("/checkout")}
-                className="w-full bg-green-600 text-white py-3 rounded-md hover:bg-green-500 transition mt-4"
+                className="w-full bg-[#A42300] text-white py-3 rounded-md hover:bg-red-700 transition mt-4"
               >
                 Proceed to Checkout
               </button>
@@ -107,6 +108,7 @@ export default function CartPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

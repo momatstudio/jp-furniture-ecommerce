@@ -6,11 +6,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
+import Footer from "@/components/Footer";
 
 export default function ProductPage({ params }) {
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
-  const { slug } = params;
+  const unwrappedParams = React.use(params);
+  const { slug } = unwrappedParams;
   const product = products.find((p) => p.slug === slug);
   const router = useRouter();
   const [selectedFeature, setSelectedFeature] = useState(null);
@@ -53,14 +55,14 @@ export default function ProductPage({ params }) {
             <div className="space-y-4">
               <div className="flex items-center gap-4">
                 <button
-                  className="px-3 py-1 border rounded-md"
+                  className="px-3 py-1 border rounded-md cursor-pointer"
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
                 >
                   -
                 </button>
                 <span>{quantity}</span>
                 <button
-                  className="px-3 py-1 border rounded-md"
+                  className="px-3 py-1 border rounded-md cursor-pointer"
                   onClick={() => setQuantity(quantity + 1)}
                 >
                   +
@@ -69,13 +71,13 @@ export default function ProductPage({ params }) {
 
               <div className="flex gap-4">
                 <button
-                  className="flex-1 bg-black text-white py-2  hover:bg-gray-800 transition"
+                  className="flex-1 bg-black text-white py-2  hover:bg-gray-800 transition cursor-pointer"
                   onClick={() => addToCart(product, quantity)}
                 >
                   Add to Cart
                 </button>
                 <button
-                  className="flex-1 bg-[#A42300] text-white py-2  hover:bg-[#a42400ec] transition"
+                  className="flex-1 bg-[#A42300] text-white py-2  hover:bg-red-700 transition cursor-pointer"
                   onClick={() => {
                     addToCart(product, quantity);
                     router.push("/checkout");
@@ -95,7 +97,7 @@ export default function ProductPage({ params }) {
               {Object.keys(product.features).map((feature) => (
                 <div key={feature} className="flex-1">
                   <button
-                    className={`p-4 text-center w-full rounded-t-lg transition-colors
+                    className={`p-4 text-center w-full rounded-t-lg transition-colors cursor-pointer
               ${
                 selectedFeature === feature
                   ? "bg-gray-100 font-medium"
@@ -126,6 +128,7 @@ export default function ProductPage({ params }) {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

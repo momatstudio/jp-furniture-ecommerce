@@ -4,6 +4,7 @@ import { FaCreditCard, FaMoneyBillWave } from "react-icons/fa";
 import { BsCashCoin } from "react-icons/bs";
 import Link from "next/link";
 import HeaderLite from "@/components/HeaderLite";
+import Footer from "@/components/Footer";
 
 export default function OrderSummaryPage() {
   const [paymentMethod, setPaymentMethod] = useState("transfer");
@@ -54,7 +55,7 @@ export default function OrderSummaryPage() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-600">Status</p>
-                    <p className="font-medium text-green-600">
+                    <p className="font-medium text-[#A42300]">
                       Pending Payment
                     </p>
                   </div>
@@ -182,13 +183,14 @@ export default function OrderSummaryPage() {
 
             <button
               onClick={() => alert("Payment Confirmed!")}
-              className="w-full bg-green-600 text-white py-4 rounded-md hover:bg-green-500 transition-colors font-medium text-lg"
+              className="w-full bg-[#A42300] text-white py-4 rounded-md hover:bg-[#A42400] transition-colors font-medium text-lg cursor-pointer"
             >
               Confirm Payment
             </button>
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }
