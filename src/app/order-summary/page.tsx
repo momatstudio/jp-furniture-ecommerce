@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { FaCreditCard, FaMoneyBillWave } from "react-icons/fa";
 import { BsCashCoin } from "react-icons/bs";
@@ -35,7 +35,7 @@ interface OrderData {
   total: number;
 }
 
-export default function OrderSummaryPage() {
+function OrderSummaryContent() {
   const [paymentMethod, setPaymentMethod] = useState("transfer");
   const [orderData, setOrderData] = useState<OrderData>({
     items: [],
@@ -332,5 +332,14 @@ export default function OrderSummaryPage() {
       </div>
       <Footer />
     </>
+  );
+}
+
+// Main page component
+export default function OrderSummaryPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <OrderSummaryContent />
+    </Suspense>
   );
 }
