@@ -4,7 +4,7 @@ import React from "react";
 
 export default function HeaderLite() {
   return (
-    <div className="flex items-center justify-center h-28 bg-white drop-shadow-sm p-4 md:px-[15%] ">
+    <div className="flex items-center justify-center h-28 bg-white p-4 md:px-[15%] ">
       <Link href="/">
         <Image
           src={"/logo1.svg"}
