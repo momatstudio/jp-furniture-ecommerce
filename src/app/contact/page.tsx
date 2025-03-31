@@ -6,7 +6,7 @@ export default function page() {
   return (
     <>
       <Header />
-      <div>page</div>
+      <div className="mt-[85px]">page</div>
       <Footer />
     </>
   );

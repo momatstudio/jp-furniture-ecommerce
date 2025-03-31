@@ -18,7 +18,7 @@ export default function ProductPage({ params }) {
   return (
     <>
       <Header />
-      <div className="p-4 md:px-[15%]">
+      <div className="p-4 md:px-[15%] mt-[85px]">
         <Breadcrumb lastPage={"Shop"} currentPage={product.name} />
 
         <UniqueProduct product={product} />

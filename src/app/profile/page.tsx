@@ -7,7 +7,7 @@ export default function ProfilePage() {
   return (
     <>
       <Header />
-      {/* ...existing code... */}
+      <div className="mt-[85px]">Profile</div>
       <Footer />
     </>
   );

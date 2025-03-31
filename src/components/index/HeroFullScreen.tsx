@@ -9,7 +9,7 @@ export default function HeroFullScreen() {
       style={{ backgroundImage: `url(${slideShow[0].image})` }}
     >
       <div className="flex flex-col justify-center items-center md:items-start text-white px-4 md:px-0 md:mx-[15%] h-full">
-        <h1 className="absolute bold text-5xl leading-[60px] left-0 right-0 text-center">
+        <h1 className="absolute font-bold text-5xl leading-[60px] left-0 right-0 text-center">
           Furniture
         </h1>
         <div className="absolute flex justify-center  bottom-20 left-0 right-0 ">

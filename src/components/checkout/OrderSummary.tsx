@@ -15,62 +15,64 @@ export default function OrderSummary({
 }: OrderSummaryProps) {
   const { cartItems } = useCart();
   return (
-    <div className="bg-white p-6">
-      <h2 className="text-xl font-semibold mb-6">Order Summary</h2>
-      <div className="space-y-4">
-        {cartItems.map((item) => {
-          if (!item.product) return null;
-          return (
-            <div
-              key={item.product.slug}
-              className="flex items-center space-x-4 py-2 border-gray-400 border-b-1 last:border-b-0"
-            >
-              <div className="relative w-20 h-20 flex-shrink-0">
-                <Image
-                  src={item.product.image}
-                  alt={item.product.name}
-                  fill
-                  className="object-cover rounded"
-                />
+    <div className="md:col-span-1">
+      <div className="bg-white rounded-lg sticky top-6">
+        <h3 className="mb-6 text-2xl font-medium">Order Summary</h3>
+        <div className="space-y-4">
+          {cartItems.map((item) => {
+            if (!item.product) return null;
+            return (
+              <div
+                key={item.product.slug}
+                className="flex items-center space-x-4 py-2 border-gray-400 border-b-1 last:border-b-0"
+              >
+                <div className="relative w-20 h-20 flex-shrink-0">
+                  <Image
+                    src={item.product.image}
+                    alt={item.product.name}
+                    fill
+                    className="object-cover rounded"
+                  />
+                </div>
+                <div className="flex-grow">
+                  <h3 className="font-normal">{item.product.name}</h3>
+                  <p className="text-sm text-gray-500">
+                    Quantity: {item.quantity}
+                  </p>
+                </div>
+                <div className="">R{item.product.price * item.quantity}</div>
               </div>
-              <div className="flex-grow">
-                <h3 className="font-medium">{item.product.name}</h3>
-                <p className="text-sm text-gray-500">
-                  Quantity: {item.quantity}
-                </p>
-              </div>
-              <div className="">R{item.product.price * item.quantity}</div>
+            );
+          })}
+
+          {/* <PaymentMethods /> */}
+          <div className="pt-4 space-y-2">
+            <div className="flex justify-between text-sm">
+              <h3 className="font-normal">SubTotal</h3>
+              <h3 className="font-normal">R{total}</h3>
             </div>
-          );
-        })}
+            <div className="flex justify-between text-sm">
+              <h3 className="font-normal">Shipping</h3>
+              <h3 className="font-normal">Free</h3>
+            </div>
+            <div className="flex justify-between text-lg font-bold">
+              <h3 className="font-normal">Total</h3>
+              <h3 className="font-normal">R{total}</h3>
+            </div>
+          </div>
 
-        {/* <PaymentMethods /> */}
-        <div className="pt-4 space-y-2">
-          <div className="flex justify-between text-sm">
-            <span>Subtotal</span>
-            <span>R{total}</span>
-          </div>
-          <div className="flex justify-between text-sm">
-            <span>Shipping</span>
-            <span>Free</span>
-          </div>
-          <div className="flex justify-between text-lg font-bold">
-            <span>Total</span>
-            <span>R{total}</span>
-          </div>
+          <button
+            className={`w-full py-3 transition mt-6  ${
+              !isFormValid
+                ? "bg-gray-400 cursor-not-allowed opacity-50 "
+                : "bg-[black] hover:hover:bg-[#000000cf] cursor-pointer"
+            } text-white`}
+            onClick={handleSubmit}
+            // disabled={!isFormValid}
+          >
+            Place Order
+          </button>
         </div>
-
-        <button
-          className={`w-full py-3 transition mt-6  ${
-            !isFormValid
-              ? "bg-gray-400 cursor-not-allowed opacity-50 "
-              : "bg-[#A42300] hover:bg-[#A42400] cursor-pointer"
-          } text-white`}
-          onClick={handleSubmit}
-          // disabled={!isFormValid}
-        >
-          Place Order
-        </button>
       </div>
     </div>
   );

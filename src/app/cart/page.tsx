@@ -20,7 +20,7 @@ export default function CartPage() {
     return (
       <>
         <Header />
-        <div className="p-4 md:px-[15%] min-h-[60vh]">
+        <div className="p-4 md:px-[15%] min-h-[60vh] mt-[85px]">
           <h3 className="text-2xl font-semibold mb-4">Shopping Cart</h3>
           <p>
             Your cart is empty.{" "}
@@ -36,7 +36,7 @@ export default function CartPage() {
   return (
     <>
       <Header />
-      <div className="p-4 md:px-[15%]">
+      <div className="p-4 md:px-[15%] mt-[85px]">
         <Breadcrumb lastPage={"Shop"} currentPage="Cart" />
         <h2 className="text-2xl font-semibold mb-4">Shopping Cart</h2>
         <div className="flex flex-col lg:flex-row gap-8">

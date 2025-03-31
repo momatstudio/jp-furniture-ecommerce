@@ -3,15 +3,22 @@ import { FormEvent } from "react";
 
 interface ShippingFormProps {
   formData: {
-    name: string;
+    firstName: string;
+    lastName: string;
     email: string;
     primaryPhone: string;
     secondaryPhone: string;
+
     address: string;
+    city: string;
+    region: string;
+    postalCode: string;
   };
   errors: Record<string, string>;
   handleInputChange: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => void;
   handleSubmit: (e: FormEvent) => void;
 }
@@ -23,38 +30,55 @@ export default function ShippingForm({
   handleSubmit,
 }: ShippingFormProps) {
   return (
-    <div className="bg-white p-6">
-      <h2 className="text-xl font-semibold mb-6">Shipping Information</h2>
+    <div className="bg-white">
+      <h3 className="mb-6 text-2xl font-medium">Customer Details</h3>
       <form className="space-y-4" onSubmit={handleSubmit}>
         <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Full Name *
+          <label className="block text-sm font-medium text-black">
+            First Name *
           </label>
           <input
             type="text"
-            name="name"
-            placeholder="Full name"
-            value={formData.name}
+            name="firstName"
+            placeholder="First name"
+            value={formData.firstName}
             onChange={handleInputChange}
-            className={`mt-1 block w-full border-b-1 py-2 ${
-              errors.name ? "border-red-500" : "border-gray-400"
+            className={`mt-1 block w-full border-b-1 py-2 font-light ${
+              errors.firstName ? "border-red-500" : "border-gray-400"
             }`}
           />
-          {errors.name && (
-            <p className="mt-1 text-sm text-red-500">{errors.name}</p>
+          {errors.firstName && (
+            <p className="mt-1 text-sm text-red-500">{errors.firstName}</p>
           )}
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Email
+          <label className="block text-sm font-medium text-black">
+            Last Name *
           </label>
+          <input
+            type="text"
+            name="lastName"
+            placeholder="Last name"
+            value={formData.lastName}
+            onChange={handleInputChange}
+            className={`mt-1 block w-full border-b-1 py-2 font-light ${
+              errors.lastName ? "border-red-500" : "border-gray-400"
+            }`}
+          />
+          {errors.lastName && (
+            <p className="mt-1 text-sm text-red-500">{errors.lastName}</p>
+          )}
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-black">Email</label>
           <input
             type="email"
             name="email"
             placeholder="info@mail.co.za"
             value={formData.email}
             onChange={handleInputChange}
-            className={`mt-1 block w-full border-b-1 py-2 ${
+            className={`mt-1 block w-full border-b-1 py-2 font-light ${
               errors.email ? "border-red-500" : "border-gray-400"
             } focus:border-green-500 focus:ring-green-500`}
           />
@@ -63,8 +87,8 @@ export default function ShippingForm({
           )}
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Cell Number (Primary) *
+          <label className="block text-sm font-medium text-black">
+            Phone (Primary) *
           </label>
           <input
             type="tel"
@@ -73,7 +97,7 @@ export default function ShippingForm({
             placeholder="0123456789"
             value={formData.primaryPhone}
             onChange={handleInputChange}
-            className={`mt-1 block w-full border-b-1 py-2 ${
+            className={`mt-1 block w-full border-b-1 py-2 font-light ${
               errors.primaryPhone ? "border-red-500" : "border-gray-400"
             } focus:border-green-500 focus:ring-green-500`}
             required
@@ -83,8 +107,8 @@ export default function ShippingForm({
           )}
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Cell Number (Secondary)
+          <label className="block text-sm font-medium text-black">
+            Phone (Secondary)
           </label>
           <input
             type="tel"
@@ -93,21 +117,22 @@ export default function ShippingForm({
             placeholder="0123456789"
             value={formData.secondaryPhone}
             onChange={handleInputChange}
-            className="mt-1 block w-full border-b-1 border-gray-400 py-2"
+            className="mt-1 block w-full border-b-1 border-gray-400 py-2 font-light"
           />
         </div>
+        <h3 className="mb-6 text-2xl font-medium">Delivery Details</h3>
         <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Address
+          <label className="block text-sm font-medium text-black">
+            Address *
           </label>
           <textarea
             name="address"
             value={formData.address}
             onChange={handleInputChange}
-            className={`mt-1 block w-full py-2 border-b-1 ${
+            className={`mt-1 block w-full py-2 border-b-1 font-light ${
               errors.address ? "border-red-500" : "border-gray-400"
             } `}
-            rows={3}
+            rows={2}
             required
           />
           {errors.address && (
@@ -144,19 +169,61 @@ export default function ShippingForm({
             Select location
           </button>
         </div>
-        {/* <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Preferred Payment Date
+        <div>
+          <label className="block text-sm font-medium text-black">City *</label>
+          <select
+            value={formData.city}
+            onChange={handleInputChange}
+            name="city"
+            required
+            className={`mt-1 block w-full border-b-1 py-2 font-light ${
+              errors.city ? "border-red-500" : "border-gray-400"
+            }`}
+          >
+            <option value="">Select</option>
+            <option value="Mabopane">Mabopane</option>
+            <option value="Soshanguve">Soshanguve</option>
+            <option value="Attrageville">Attrageville</option>
+          </select>
+          {errors.city && (
+            <p className="mt-1 text-sm text-red-500">{errors.city}</p>
+          )}
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-black">
+            Region *
+          </label>
+          <select
+            value={formData.region}
+            onChange={handleInputChange}
+            name="region"
+            required
+            className={`mt-1 block w-full border-b-1 py-2 font-light ${
+              errors.region ? "border-red-500" : "border-gray-400"
+            }`}
+          >
+            <option value="">Select</option>
+            <option value="pretoria">Pretoria</option>
+          </select>
+          {errors.region && (
+            <p className="mt-1 text-sm text-red-500">{errors.region}</p>
+          )}
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-black">
+            Postal code
           </label>
           <input
-            type="date"
-            min={new Date().toISOString().split("T")[0]}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+            type="number"
+            name="postalCode"
+            pattern="[0-9]{4}"
+            placeholder="0001"
+            value={formData.postalCode}
+            onChange={handleInputChange}
+            className="mt-1 block w-full border-b-1 border-gray-400 py-2 font-light"
           />
-          <p className="mt-1 text-sm text-gray-500">
-            *Only applicable if you order with credit
-          </p>
-        </div> */}
+        </div>
       </form>
     </div>
   );
