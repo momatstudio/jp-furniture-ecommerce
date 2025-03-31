@@ -13,8 +13,8 @@ export default function HeroFullScreen() {
           Furniture
         </h1>
         <div className="absolute flex justify-center  bottom-20 left-0 right-0 ">
-          <Button name="SHOP NOW" color={"#ffffff"} route={"/shop"} />
-          <Button name="CONTACT US" color={"#ffffff"} route={"/contact"} />
+          <Button name="SHOP NOW" color={"#ffffff"} route="/shop" />
+          <Button name="CONTACT US" color={"#ffffff"} route="/contact" />
         </div>
       </div>
     </div>
