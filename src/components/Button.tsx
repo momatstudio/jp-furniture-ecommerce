@@ -5,7 +5,7 @@ import React from "react";
 interface ButtonProps {
   name: string;
   color: string;
-  route: string;
+  route?: string;
 }
 export default function Button({ name, color, route }: ButtonProps) {
   const router = useRouter();

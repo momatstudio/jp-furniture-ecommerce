@@ -34,9 +34,7 @@ export default function Hero() {
           >
             View our extensive collection of luxury furniture
           </div>
-          <Link href="/shop">
-            <Button name="SHOP NOW" color={"#ffffff"} />
-          </Link>
+          <Button route={"shop"} name="SHOP NOW" color={"#ffffff"} />
         </div>
       </div>
     </div>
