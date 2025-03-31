@@ -1,13 +1,13 @@
 "use client";
 import React, { useState } from "react";
 import Header from "@/components/Header";
-import Breadcrumb from "@/components/checkout/Breadcrumb";
+import Breadcrumb from "@/components/Breadcrumb";
 import ShippingForm from "@/components/checkout/ShippingForm";
 import OrderSummary from "@/components/checkout/OrderSummary";
 import { useCart } from "@/context/CartContext";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Footer from "@/components/Footer";
+import Footer from "@/components/footer/Footer";
 
 export default function CheckoutPage() {
   const { cartItems } = useCart();
@@ -95,9 +95,9 @@ export default function CheckoutPage() {
   return (
     <>
       <Header />
-      <div className="bg-gray-50 min-h-screen">
+      <div className="min-h-screen">
         <div className="max-w-7xl mx-auto px-4 md:px-28 py-8">
-          <Breadcrumb currentPage="Checkout" />
+          <Breadcrumb lastPage={"Cart"} currentPage="Checkout" />
 
           {cartItems.length === 0 ? (
             <div className="text-center py-12">
@@ -118,7 +118,6 @@ export default function CheckoutPage() {
                 handleSubmit={handleSubmit}
               />
               <OrderSummary
-                cartItems={cartItems}
                 total={total}
                 isFormValid={isFormValid()}
                 handleSubmit={handleSubmit}

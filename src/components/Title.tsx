@@ -1,22 +1,14 @@
 import React from "react";
-import Button from "./Button";
-import Link from "next/link";
 
 interface TitleProps {
   name: string;
-  description: string;
+  description?: string;
+  show?: Boolean;
 }
-export default function Title({ name, description }: TitleProps) {
+export default function Title({ name, show }: TitleProps) {
   return (
-    <div className="py-4">
-      <h2 className="pt-5">{name}</h2>
-
-      <div className="flex justify-between items-center">
-        <span>{description}</span>
-        <Link href="/shop" className="hidden md:block">
-          <Button name="SHOP NOW" color="#a42300" />
-        </Link>
-      </div>
+    <div className=" flex justify-center py-16">
+      <h2 className="">{name}</h2>
     </div>
   );
 }

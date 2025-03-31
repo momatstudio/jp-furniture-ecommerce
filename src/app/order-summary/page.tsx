@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 import { FaCreditCard, FaMoneyBillWave } from "react-icons/fa";
 import { BsCashCoin } from "react-icons/bs";
-import Link from "next/link";
 import HeaderLite from "@/components/HeaderLite";
-import Footer from "@/components/Footer";
+import Footer from "@/components/footer/Footer";
+import Breadcrumb from "@/components/Breadcrumb";
 
 export default function OrderSummaryPage() {
   const [paymentMethod, setPaymentMethod] = useState("transfer");
@@ -14,19 +14,9 @@ export default function OrderSummaryPage() {
       <HeaderLite />
       <div className="bg-gray-50 min-h-screen">
         <div className="max-w-3xl mx-auto px-4 py-8">
-          {/* Breadcrumb */}
-          <nav className="flex mb-8 text-sm">
-            <Link href="/" className="text-gray-500 hover:text-gray-700">
-              Home
-            </Link>
-            <span className="mx-2 text-gray-500">/</span>
-            <Link href="/cart" className="text-gray-500 hover:text-gray-700">
-              Cart
-            </Link>
-            <span className="mx-2 text-gray-500">/</span>
-            <span className="text-gray-900 font-medium">Order Summary</span>
-          </nav>
+          <Breadcrumb lastPage={"Checkout"} currentPage="Order Summary" />
 
+          {/* Order Summary */}
           <div className="bg-white p-6 rounded-lg shadow-md mb-6">
             <h2 className="text-2xl font-bold mb-6 text-gray-800">
               Order Summary & Payment
@@ -161,11 +151,11 @@ export default function OrderSummaryPage() {
                     <div className="space-y-2">
                       <div className="flex justify-between py-2 border-b border-gray-200">
                         <span className="text-gray-600">Bank Name</span>
-                        <span className="font-medium">Standard Bank</span>
+                        <span className="font-medium">Capitec Bank</span>
                       </div>
                       <div className="flex justify-between py-2 border-b border-gray-200">
                         <span className="text-gray-600">Account Holder</span>
-                        <span className="font-medium">JP E-commerce</span>
+                        <span className="font-medium">Phillmon</span>
                       </div>
                       <div className="flex justify-between py-2 border-b border-gray-200">
                         <span className="text-gray-600">Account Number</span>
@@ -183,7 +173,7 @@ export default function OrderSummaryPage() {
 
             <button
               onClick={() => alert("Payment Confirmed!")}
-              className="w-full bg-[#A42300] text-white py-4 hover:bg-[#A42400] transition-colors font-medium text-lg cursor-pointer"
+              className="w-full bg-[#A42300] text-white py-3  hover:bg-[#A42400] transition-colors font-medium text-lg cursor-pointer"
             >
               Confirm Payment
             </button>

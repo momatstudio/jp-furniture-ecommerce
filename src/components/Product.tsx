@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { FiArrowRight } from "react-icons/fi";
 import { useCart } from "@/context/CartContext";
 
@@ -15,9 +15,14 @@ interface ProductProps {
 
 export default function Product({ product }: ProductProps) {
   const { addToCart } = useCart();
+  const [hover, setHover] = useState(false);
 
   return (
-    <div className="flex flex-col items-center bg-white border-[#A42300] border-1 hover:border-red-700 py-4 font-light cursor-pointer relative h-full p-4">
+    <div
+      className="flex flex-col items-center bg-white border-gray-400 border-1 hover:border-black py-4 font-light cursor-pointer relative h-full p-4"
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+    >
       <Image
         alt="product"
         width={250}
@@ -29,10 +34,15 @@ export default function Product({ product }: ProductProps) {
       <span className="py-2">R{product.price}.00</span>
       <button
         onClick={() => addToCart(product)}
-        className="flex items-center border-1 border-red-800 h-[40] px-4 hover:bg-[#A42300] hover:text-white cursor-pointer mt-auto"
+        className="flex items-center border-1 border-gray-400 h-[40] px-4 cursor-pointer mt-auto"
+        style={{
+          backgroundColor: hover ? "black" : "white",
+          borderColor: hover ? "black" : "gray",
+          color: hover ? "white" : "black",
+        }}
       >
         Add to cart{" "}
-        <FiArrowRight className="ml-1 text-red-800 hover:text-white" />
+        <FiArrowRight style={{ color: hover ? "white" : "black" }} />
       </button>
     </div>
   );

@@ -23,7 +23,7 @@ export default function ShippingForm({
   handleSubmit,
 }: ShippingFormProps) {
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
+    <div className="bg-white p-6">
       <h2 className="text-xl font-semibold mb-6">Shipping Information</h2>
       <form className="space-y-4" onSubmit={handleSubmit}>
         <div>
@@ -33,11 +33,12 @@ export default function ShippingForm({
           <input
             type="text"
             name="name"
+            placeholder="Full name"
             value={formData.name}
             onChange={handleInputChange}
-            className={`mt-1 block w-full rounded-md shadow-sm p-2 ${
-              errors.name ? "border-red-500" : "border-gray-300"
-            } focus:border-green-500 focus:ring-green-500`}
+            className={`mt-1 block w-full border-b-1 py-2 ${
+              errors.name ? "border-red-500" : "border-gray-400"
+            }`}
           />
           {errors.name && (
             <p className="mt-1 text-sm text-red-500">{errors.name}</p>
@@ -50,10 +51,11 @@ export default function ShippingForm({
           <input
             type="email"
             name="email"
+            placeholder="info@mail.co.za"
             value={formData.email}
             onChange={handleInputChange}
-            className={`mt-1 block w-full rounded-md shadow-sm p-2 ${
-              errors.email ? "border-red-500" : "border-gray-300"
+            className={`mt-1 block w-full border-b-1 py-2 ${
+              errors.email ? "border-red-500" : "border-gray-400"
             } focus:border-green-500 focus:ring-green-500`}
           />
           {errors.email && (
@@ -71,8 +73,8 @@ export default function ShippingForm({
             placeholder="0123456789"
             value={formData.primaryPhone}
             onChange={handleInputChange}
-            className={`mt-1 block w-full rounded-md shadow-sm p-2 ${
-              errors.primaryPhone ? "border-red-500" : "border-gray-300"
+            className={`mt-1 block w-full border-b-1 py-2 ${
+              errors.primaryPhone ? "border-red-500" : "border-gray-400"
             } focus:border-green-500 focus:ring-green-500`}
             required
           />
@@ -91,7 +93,7 @@ export default function ShippingForm({
             placeholder="0123456789"
             value={formData.secondaryPhone}
             onChange={handleInputChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 p-2"
+            className="mt-1 block w-full border-b-1 border-gray-400 py-2"
           />
         </div>
         <div>
@@ -102,9 +104,9 @@ export default function ShippingForm({
             name="address"
             value={formData.address}
             onChange={handleInputChange}
-            className={`mt-1 block w-full rounded-md shadow-sm p-2 ${
-              errors.address ? "border-red-500" : "border-gray-300"
-            } focus:border-green-500 focus:ring-green-500`}
+            className={`mt-1 block w-full py-2 border-b-1 ${
+              errors.address ? "border-red-500" : "border-gray-400"
+            } `}
             rows={3}
             required
           />
@@ -139,10 +141,10 @@ export default function ShippingForm({
                 d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
               />
             </svg>
-            Select Location on Map
+            Select location
           </button>
         </div>
-        <div>
+        {/* <div>
           <label className="block text-sm font-medium text-gray-700">
             Preferred Payment Date
           </label>
@@ -154,7 +156,7 @@ export default function ShippingForm({
           <p className="mt-1 text-sm text-gray-500">
             *Only applicable if you order with credit
           </p>
-        </div>
+        </div> */}
       </form>
     </div>
   );

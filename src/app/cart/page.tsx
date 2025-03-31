@@ -1,6 +1,7 @@
 "use client";
-import ClientHeader from "@/components/ClientHeader";
-import Footer from "@/components/Footer";
+import Breadcrumb from "@/components/Breadcrumb";
+import Footer from "@/components/footer/Footer";
+import Header from "@/components/Header";
 import { useCart } from "@/context/CartContext";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,7 +19,7 @@ export default function CartPage() {
   if (items.length === 0) {
     return (
       <>
-        <ClientHeader />
+        <Header />
         <div className="p-4 md:px-[15%] min-h-[60vh]">
           <h3 className="text-2xl font-semibold mb-4">Shopping Cart</h3>
           <p>
@@ -34,8 +35,9 @@ export default function CartPage() {
 
   return (
     <>
-      <ClientHeader />
+      <Header />
       <div className="p-4 md:px-[15%]">
+        <Breadcrumb lastPage={"Shop"} currentPage="Cart" />
         <h2 className="text-2xl font-semibold mb-4">Shopping Cart</h2>
         <div className="flex flex-col lg:flex-row gap-8">
           <div className="lg:w-2/3">
@@ -100,7 +102,7 @@ export default function CartPage() {
               </div>
               <button
                 onClick={() => router.push("/checkout")}
-                className="w-full bg-[#A42300] text-white py-3 rounded-md hover:bg-red-700 transition mt-4"
+                className="w-full bg-[#A42300] text-white py-3 hover:bg-red-700 transition mt-4"
               >
                 Proceed to Checkout
               </button>

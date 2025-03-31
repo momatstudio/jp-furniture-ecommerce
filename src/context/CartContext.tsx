@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useContext, useState, useEffect } from "react"; // Import useEffect
+import { createContext, useContext, useState, useEffect } from "react";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 type Product = {
