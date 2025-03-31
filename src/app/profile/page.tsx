@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
-import ClientHeader from "@/components/ClientHeader";
 import Footer from "@/components/footer/Footer";
+import Header from "@/components/Header";
 
 export default function ProfilePage() {
   return (
     <>
-      <ClientHeader />
+      <Header />
       {/* ...existing code... */}
       <Footer />
     </>
