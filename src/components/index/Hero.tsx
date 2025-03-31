@@ -1,7 +1,5 @@
 import React from "react";
 import { slideShow } from "../../../data";
-import Button from "../Button";
-import { FiSearch } from "react-icons/fi";
 
 export default function Hero() {
   return (
