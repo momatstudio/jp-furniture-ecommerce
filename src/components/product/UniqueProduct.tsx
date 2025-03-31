@@ -1,5 +1,4 @@
-import { useCart } from "@/context/CartContext";
-import React, { useState } from "react";
+import React from "react";
 import DisplayProduct from "./DisplayProduct";
 import ProductSummary from "./ProductSummary";
 import { Product } from "@/types";
