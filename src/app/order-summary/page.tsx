@@ -7,6 +7,7 @@ import HeaderLite from "@/components/HeaderLite";
 import Footer from "@/components/footer/Footer";
 import Breadcrumb from "@/components/Breadcrumb";
 import Link from "next/link";
+import Image from "next/image";
 
 interface OrderData {
   items: {
@@ -114,10 +115,14 @@ function OrderSummaryContent() {
                       className="flex items-center justify-between p-4 bg-gray-50 rounded-lg"
                     >
                       <div className="flex items-center space-x-4">
-                        <img
+                        <Image
                           src={item.image}
                           alt={item.name}
-                          className="w-16 h-16 object-cover rounded-md"
+                          // fill
+                          width={40}
+                          height={40}
+                          className="object-cover rounded-md"
+                          priority
                         />
                         <div>
                           <h4 className="font-medium text-gray-900">
@@ -322,7 +327,7 @@ function OrderSummaryContent() {
                     onClick={() => alert("Payment Confirmed!")}
                     className="w-full bg-black text-white py-3 hover:bg-[#000000cf] transition-colors font-medium text-lg mt-6 cursor-pointer"
                   >
-                    Confirm Payment
+                    Complete order
                   </button>
                 </div>
               </div>
