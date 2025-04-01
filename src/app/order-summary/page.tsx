@@ -285,6 +285,12 @@ function OrderSummaryContent() {
                             </span>
                           </div>
                           <div className="flex justify-between py-2 border-b border-gray-100">
+                            <span className="text-gray-600">Cell Number</span>
+                            <span className="font-medium text-gray-900">
+                              076 252 4329
+                            </span>
+                          </div>
+                          <div className="flex justify-between py-2 border-b border-gray-100">
                             <span className="text-gray-600">Reference</span>
                             <span className="font-medium text-gray-900">
                               ORDER-123456
@@ -327,7 +333,7 @@ function OrderSummaryContent() {
                     onClick={() => alert("Payment Confirmed!")}
                     className="w-full bg-black text-white py-3 hover:bg-[#000000cf] transition-colors font-medium text-lg mt-6 cursor-pointer"
                   >
-                    Complete order
+                    Proceed to Payment
                   </button>
                 </div>
               </div>

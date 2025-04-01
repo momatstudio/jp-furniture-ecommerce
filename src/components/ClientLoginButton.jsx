@@ -5,19 +5,23 @@ import { useRouter } from "next/navigation";
 import { CiUser } from "react-icons/ci";
 
 export default function ClientLoginButton() {
-  const { user } = useUser();
+  const { user, error, isLoading } = useUser();
   const router = useRouter();
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>{error.message}</div>;
+
   return (
     <>
-      {user ? (
+      {isLoading === false && user ? (
         <button
           href={"/profile"}
           className="hidden md:flex h-[40px] w-[40px] rounded-full ml-4"
           onClick={() => router.push("/profile")}
         >
-          <Image
+          <img
             src={user?.picture || "/default-avatar.png"}
-            width={25}
+            // width={25}
             height={25}
             className="rounded-full"
             alt={user?.name || "User avatar"}

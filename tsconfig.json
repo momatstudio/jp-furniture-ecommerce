@@ -38,7 +38,8 @@
     "src/app/page.sjx",
     "src/components/Header.jsx",
     "src/app/shop/product/[slug]/page.jsx",
-    "src/components/product/UniqueProductSpecs.jsx"
+    "src/components/product/UniqueProductSpecs.jsx",
+    "src/middleware.js"
   ],
   "exclude": ["node_modules"]
 }
