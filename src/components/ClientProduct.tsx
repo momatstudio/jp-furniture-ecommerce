@@ -3,6 +3,7 @@ import Product from "./Product";
 
 interface ProductProps {
   product: {
+    id: string;
     name: string;
     slug: string;
     price: number;
