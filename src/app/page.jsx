@@ -1,9 +1,4 @@
-import Header from "@/components/Header";
-import HeroFullScreen from "@/components/index/HeroFullScreen";
-import Products from "@/components/index/Products";
-// import ProductAd from "@/components/index/ProductAd";
-import Title from "@/components/Title";
-import Footer from "@/components/footer/Footer";
+import { Header, HeroFullScreen, Products, Title, Footer } from "@/components/";
 
 export default function Home() {
   return (

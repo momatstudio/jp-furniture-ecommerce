@@ -1,62 +1,73 @@
 "use client";
 import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { FaCreditCard, FaMoneyBillWave } from "react-icons/fa";
-import { BsCashCoin } from "react-icons/bs";
-import HeaderLite from "@/components/HeaderLite";
-import Footer from "@/components/footer/Footer";
-import Breadcrumb from "@/components/Breadcrumb";
+import { HeaderLite, Footer, Breadcrumb } from "@/components";
+
 import Link from "next/link";
 import Image from "next/image";
 
 interface OrderData {
-  items: {
-    name: string;
-    price: number;
-    quantity: number;
-    image: string;
-  }[];
-  customerDetails: {
+  client: {
     firstName: string;
     lastName: string;
     email: string;
     primaryPhone: string;
     secondaryPhone: string;
-  };
-
-  deliveryInfo: {
     address: string;
     city: string;
     region: string;
     postalCode: string;
+    latitude: string;
+    longitude: string;
+    preferredPaymentDate: string;
   };
+  items: {
+    id: string;
+    title: string;
+    price: number;
+    quantity: number;
+    imageUrl: string;
+  }[];
+  orderInfo: {
+    orderDate: string;
+    orderNumber: string;
+  };
+  payments: any[];
   subtotal: number;
   shipping: number;
   tax: number;
   total: number;
+  status: string;
 }
 
 function OrderSummaryContent() {
   const [paymentMethod, setPaymentMethod] = useState("transfer");
   const [orderData, setOrderData] = useState<OrderData>({
-    items: [],
-    customerDetails: {
+    client: {
       firstName: "",
       lastName: "",
       email: "",
       primaryPhone: "",
       secondaryPhone: "",
-    },
-    deliveryInfo: {
       address: "",
       region: "",
       city: "",
       postalCode: "",
+      latitude: "",
+      longitude: "",
+      preferredPaymentDate: "01",
     },
+    items: [{ id: "", title: "", price: 0, quantity: 0, imageUrl: "" }],
+    orderInfo: {
+      orderDate: "",
+      orderNumber: "",
+    },
+    payments: [],
     subtotal: 0,
     shipping: 0,
     tax: 0,
     total: 0,
+    status: "",
   });
   const [error, setError] = useState<string>("");
 
@@ -68,7 +79,7 @@ function OrderSummaryContent() {
       if (!orderParam) throw new Error("No order data found");
 
       const parsedOrder = JSON.parse(decodeURIComponent(orderParam));
-      if (!parsedOrder.items || !parsedOrder.deliveryInfo) {
+      if (!parsedOrder.items || !parsedOrder.client) {
         throw new Error("Invalid order data");
       }
 
@@ -78,6 +89,44 @@ function OrderSummaryContent() {
       setError("Failed to load order details");
     }
   }, [searchParams]);
+
+  const handlePayment = () => {
+    if (paymentMethod === "payfast") {
+      // PayFast Configuration
+      const paymentData = {
+        merchant_id: "10038071", // Replace with your PayFast merchant ID
+        merchant_key: "r1y2ikfcgyd80", // Replace with your PayFast merchant key
+        amount: orderData.total.toFixed(2),
+        item_name: `Order ${orderData.orderInfo.orderNumber}`,
+        name_first: orderData.client.firstName,
+        name_last: orderData.client.lastName,
+        email_address: orderData.client.email,
+        cell_number: orderData.client.primaryPhone,
+        return_url: `${window.location.origin}/payment-success`,
+        cancel_url: `${window.location.origin}/payment-cancelled`,
+        notify_url: `${window.location.origin}/api/payfast-notify`, // Your webhook endpoint
+      };
+
+      // Create and submit form
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = "https://sandbox.payfast.co.za/eng/process"; // Use https://www.payfast.co.za/eng/process for production
+
+      Object.entries(paymentData).forEach(([key, value]) => {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = String(value);
+        form.appendChild(input);
+      });
+
+      document.body.appendChild(form);
+      form.submit();
+    } else {
+      // Handle bank transfer
+      alert("Bank transfer details have been displayed");
+    }
+  };
 
   if (error) {
     return (
@@ -115,27 +164,28 @@ function OrderSummaryContent() {
                       className="flex items-center justify-between p-4 bg-gray-50 rounded-lg"
                     >
                       <div className="flex items-center space-x-4">
-                        <Image
-                          src={item.image}
-                          alt={item.name}
-                          // fill
-                          width={40}
-                          height={40}
-                          className="object-cover rounded-md"
-                          priority
-                        />
+                        {item.imageUrl ? (
+                          <Image
+                            src={item.imageUrl}
+                            alt={item.title}
+                            width={40}
+                            height={40}
+                            className="object-cover rounded-md"
+                            priority
+                          />
+                        ) : (
+                          <div className="w-[40px] h-[40px] bg-gray-200 rounded-md" />
+                        )}
                         <div>
                           <h4 className="font-medium text-gray-900">
-                            {item.name}
+                            {item.title}
                           </h4>
                           <p className="text-sm text-gray-500">
                             Quantity: {item.quantity}
                           </p>
                         </div>
                       </div>
-                      <p className="font-medium text-gray-900">
-                        R{item.price.toFixed(2)}
-                      </p>
+                      <p className="font-medium text-gray-900">R{item.price}</p>
                     </div>
                   ))}
                 </div>
@@ -147,158 +197,17 @@ function OrderSummaryContent() {
                   </h3>
                   <div className="bg-gray-50 p-4 rounded-lg">
                     <p className="text-gray-700">
-                      {orderData.customerDetails.firstName}
+                      {orderData.client.firstName}
                     </p>
-                    <p className="text-gray-700">
-                      {orderData.customerDetails.lastName}
+                    <p className="text-gray-700">{orderData.client.lastName}</p>
+                    <p className="text-gray-600">{orderData.client.address}</p>
+                    <p className="text-gray-600">{orderData.client.city}</p>
+                    <p className="text-gray-600">
+                      {orderData.client.region}, {orderData.client.postalCode}
                     </p>
                     <p className="text-gray-600">
-                      {orderData.deliveryInfo.address}
+                      Phone: {orderData.client.primaryPhone}
                     </p>
-                    <p className="text-gray-600">
-                      {orderData.deliveryInfo.city}
-                    </p>
-                    <p className="text-gray-600">
-                      {orderData.deliveryInfo.region},{" "}
-                      {orderData.deliveryInfo.postalCode}
-                    </p>
-                    <p className="text-gray-600">
-                      Phone: {orderData.customerDetails.primaryPhone}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Payment Methods */}
-              <div className="bg-white p-6 rounded-lg ">
-                <h3 className="text-xl font-semibold mb-4 text-gray-700">
-                  Select Payment Method
-                </h3>
-                <div className="grid grid-cols-3 gap-4">
-                  <button
-                    onClick={() => setPaymentMethod("transfer")}
-                    className={`flex flex-col items-center p-4 border transition-all ${
-                      paymentMethod === "transfer"
-                        ? "border-black"
-                        : "border-gray-200 hover:border-black"
-                    }`}
-                  >
-                    <FaMoneyBillWave
-                      className={`text-2xl mb-2 ${
-                        paymentMethod === "transfer"
-                          ? "text-black"
-                          : "text-gray-400"
-                      }`}
-                    />
-                    <span className="text-sm font-medium">Bank Transfer</span>
-                  </button>
-                  <button
-                    onClick={() => setPaymentMethod("eft")}
-                    className={`flex flex-col items-center p-4 border transition-all ${
-                      paymentMethod === "eft"
-                        ? "border-black"
-                        : "border-gray-200 hover:border-black"
-                    }`}
-                  >
-                    <BsCashCoin
-                      className={`text-2xl mb-2 ${
-                        paymentMethod === "eft" ? "text-black" : "text-gray-400"
-                      }`}
-                    />
-                    <span className="text-sm font-medium">EFT</span>
-                  </button>
-                  <button
-                    onClick={() => setPaymentMethod("credit")}
-                    className={`flex flex-col items-center p-4 border transition-all ${
-                      paymentMethod === "credit"
-                        ? "border-black"
-                        : "border-gray-200 hover:border-black"
-                    }`}
-                  >
-                    <FaCreditCard
-                      className={`text-2xl mb-2 ${
-                        paymentMethod === "credit"
-                          ? "text-black"
-                          : "text-gray-400"
-                      }`}
-                    />
-                    <span className="text-sm font-medium">Credit Card</span>
-                  </button>
-                </div>
-
-                {/* Payment Details */}
-                <div className="mt-6">
-                  <div className="bg-gray-50 p-6 rounded-lg">
-                    {paymentMethod === "credit" ? (
-                      <div className="space-y-4">
-                        <h3 className="text-lg font-medium mb-4 text-gray-700">
-                          Credit Card Details
-                        </h3>
-                        <div className="space-y-4">
-                          <input
-                            type="text"
-                            placeholder="Card Number"
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md"
-                          />
-                          <div className="grid grid-cols-2 gap-4">
-                            <input
-                              type="text"
-                              placeholder="MM/YY"
-                              className="px-4 py-2 border border-gray-300 rounded-md"
-                            />
-                            <input
-                              type="text"
-                              placeholder="CVV"
-                              className="px-4 py-2 border border-gray-300 rounded-md"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="bg-white p-4 rounded-lg border border-gray-200">
-                        <h3 className="text-lg font-medium mb-4 text-gray-700">
-                          {paymentMethod === "transfer"
-                            ? "Bank Transfer Details"
-                            : "EFT Details"}
-                        </h3>
-                        <div className="space-y-3">
-                          <div className="flex justify-between py-2 border-b border-gray-100">
-                            <span className="text-gray-600">Bank Name</span>
-                            <span className="font-medium text-gray-900">
-                              Capitec Bank
-                            </span>
-                          </div>
-                          <div className="flex justify-between py-2 border-b border-gray-100">
-                            <span className="text-gray-600">
-                              Account Holder
-                            </span>
-                            <span className="font-medium text-gray-900">
-                              Phillmon
-                            </span>
-                          </div>
-                          <div className="flex justify-between py-2 border-b border-gray-100">
-                            <span className="text-gray-600">
-                              Account Number
-                            </span>
-                            <span className="font-medium text-gray-900">
-                              123456789
-                            </span>
-                          </div>
-                          <div className="flex justify-between py-2 border-b border-gray-100">
-                            <span className="text-gray-600">Cell Number</span>
-                            <span className="font-medium text-gray-900">
-                              076 252 4329
-                            </span>
-                          </div>
-                          <div className="flex justify-between py-2 border-b border-gray-100">
-                            <span className="text-gray-600">Reference</span>
-                            <span className="font-medium text-gray-900">
-                              ORDER-123456
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    )}
                   </div>
                 </div>
               </div>
@@ -306,7 +215,7 @@ function OrderSummaryContent() {
 
             {/* Right Column - Order Summary */}
             <div className="md:col-span-1">
-              <div className="bg-white p-6 rounded-lg  sticky top-6">
+              <div className="bg-white p-6 rounded-lg sticky top-6">
                 <h3 className="text-xl font-semibold mb-6 pb-4 border-b">
                   Order Summary
                 </h3>
@@ -319,21 +228,95 @@ function OrderSummaryContent() {
                     <span>Shipping</span>
                     <span>R{orderData.shipping?.toFixed(2)}</span>
                   </div>
-                  <div className="flex justify-between text-gray-600">
-                    <span>Tax</span>
-                    <span>R{orderData.tax?.toFixed(2)}</span>
-                  </div>
                   <div className="border-t pt-4 mt-4">
                     <div className="flex justify-between font-semibold text-lg">
                       <span>Total</span>
                       <span>R{orderData.total?.toFixed(2)}</span>
                     </div>
                   </div>
+
+                  {/* Payment Method Selection */}
+                  <div className="border-t pt-4">
+                    <h4 className="text-sm font-medium mb-3 text-gray-700">
+                      Select Payment Method
+                    </h4>
+                    <div className="grid grid-cols-2 gap-3">
+                      <button
+                        onClick={() => setPaymentMethod("transfer")}
+                        className={`flex justify-center items-center p-3 border rounded-md transition-all ${
+                          paymentMethod === "transfer"
+                            ? "border-black bg-gray-50"
+                            : "border-gray-200 hover:border-black"
+                        }`}
+                      >
+                        <Image
+                          src={"/bank tranfer.png"}
+                          alt="bank transfer"
+                          width={40}
+                          height={40}
+                        />
+                      </button>
+                      <button
+                        onClick={() => setPaymentMethod("payfast")}
+                        className={`flex justify-center items-center p-3 border rounded-md transition-all ${
+                          paymentMethod === "payfast"
+                            ? "border-black bg-gray-50"
+                            : "border-gray-200 hover:border-black"
+                        }`}
+                      >
+                        <Image
+                          src={"/Payfast Logo.png"}
+                          alt="PayFast"
+                          width={100}
+                          height={40}
+                          className="object-contain"
+                        />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Bank Transfer Details - Show only when transfer is selected */}
+                  {paymentMethod === "transfer" && (
+                    <div className="mt-4 bg-gray-50 p-4 rounded-lg border border-gray-200">
+                      <h3 className="text-sm font-medium mb-3 text-gray-700">
+                        Bank Transfer Details
+                      </h3>
+                      <div className="space-y-2 text-sm">
+                        <div className="flex justify-between py-2 border-b border-gray-100">
+                          <span className="text-gray-600">Bank Name</span>
+                          <span className="font-medium text-gray-900">
+                            Capitec Bank
+                          </span>
+                        </div>
+                        <div className="flex justify-between py-2 border-b border-gray-100">
+                          <span className="text-gray-600">Account Holder</span>
+                          <span className="font-medium text-gray-900">
+                            Phillmon
+                          </span>
+                        </div>
+                        <div className="flex justify-between py-2 border-b border-gray-100">
+                          <span className="text-gray-600">Account Number</span>
+                          <span className="font-medium text-gray-900">
+                            123456789
+                          </span>
+                        </div>
+                        <div className="flex justify-between py-2 border-b border-gray-100">
+                          <span className="text-gray-600">Reference</span>
+                          <span className="font-medium text-gray-900">
+                            {orderData.orderInfo.orderNumber || "ORDER-123456"}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
                   <button
-                    onClick={() => alert("Payment Confirmed!")}
-                    className="w-full bg-black text-white py-3 hover:bg-[#000000cf] transition-colors font-medium text-lg mt-6 cursor-pointer"
+                    onClick={handlePayment}
+                    className="w-full bg-black text-white py-3 hover:bg-[#000000cf] transition-colors font-medium text-lg mt-6 cursor-pointer rounded-md"
                   >
-                    Proceed to Payment
+                    {paymentMethod === "payfast"
+                      ? "Pay with PayFast"
+                      : "Confirm Order"}
                   </button>
                 </div>
               </div>

@@ -6,10 +6,11 @@
 // }
 export interface Product {
   product: {
+    id: string;
     name: string;
     slug: string;
     price: number;
-    image: string;
+    imageUrl: string;
     description: string;
     category: string;
     inStock: boolean;
@@ -21,7 +22,7 @@ export interface Product {
       "Credit Terms": string;
       Delivery: string;
       Returns: string;
-      Dimentions: undefined;
+      Dimentions: string;
     };
   };
 }

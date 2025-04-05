@@ -1,16 +1,18 @@
 "use client";
 import React from "react";
 import Header from "@/components/Header";
-import { products } from "../../../../../data";
-import Link from "next/link";
-import Footer from "@/components/footer/Footer";
-import UniqueProduct from "@/components/product/UniqueProduct";
-import UniqueProductSpecs from "@/components/product/UniqueProductSpecs";
-import Breadcrumb from "@/components/Breadcrumb";
+import { useProducts } from "@/context/ProductsContext";
+import {
+  Footer,
+  UniqueProduct,
+  UniqueProductSpecs,
+  Breadcrumb,
+} from "@/components";
 
 export default function ProductPage({ params }) {
   const unwrappedParams = React.use(params);
   const { slug } = unwrappedParams;
+  const { products } = useProducts();
   const product = products.find((p) => p.slug === slug);
 
   if (!product) return <div>Product not found</div>;

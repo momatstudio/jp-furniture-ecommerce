@@ -2,6 +2,7 @@ import { UserProvider } from "@auth0/nextjs-auth0/client";
 import { CartProvider } from "@/context/CartContext";
 import "./globals.css";
 import { Poppins } from "next/font/google";
+import { ProductsProvider } from "@/context/ProductsContext";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -19,7 +20,9 @@ export default function RootLayout({ children }) {
     <html lang="en" className={poppins.variable}>
       <body>
         <UserProvider>
-          <CartProvider>{children}</CartProvider>
+          <ProductsProvider>
+            <CartProvider>{children}</CartProvider>
+          </ProductsProvider>
         </UserProvider>
       </body>
     </html>

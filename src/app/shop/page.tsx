@@ -1,8 +1,4 @@
-"use client";
-import Footer from "@/components/footer/Footer";
-import Header from "@/components/Header";
-import Products from "@/components/index/Products";
-import Hero from "@/components/index/Hero";
+import { Footer, Header, Products, Hero, Breadcrumb } from "@/components";
 
 export default function Home() {
   return (
@@ -10,6 +6,7 @@ export default function Home() {
       <Header />
       <Hero />
       <div className="p-4 md:px-[15%]">
+        <Breadcrumb currentPage="Shop" />
         <Products />
       </div>
       <Footer />

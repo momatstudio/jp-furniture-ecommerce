@@ -39,7 +39,8 @@
     "src/components/Header.jsx",
     "src/app/shop/product/[slug]/page.jsx",
     "src/components/product/UniqueProductSpecs.jsx",
-    "src/middleware.js"
+    "src/middleware.js",
+    "src/context/ProductsContext.js"
   ],
   "exclude": ["node_modules"]
 }

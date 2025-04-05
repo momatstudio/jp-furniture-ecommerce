@@ -1,16 +1,22 @@
 "use client";
 import React, { useState } from "react";
-import ShippingForm from "@/components/checkout/ShippingForm";
-import OrderSummary from "@/components/checkout/OrderSummary";
+import {
+  ShippingForm,
+  OrderSummary,
+  Footer,
+  HeaderLite,
+  Breadcrumb,
+} from "@/components";
+
 import { useCart } from "@/context/CartContext";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Footer from "@/components/footer/Footer";
-import HeaderLite from "@/components/HeaderLite";
-import Breadcrumb from "@/components/Breadcrumb";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "@/config/firebase";
+import { generateOrderNumber, getCurrentDate } from "../actions";
 
 export default function CheckoutPage() {
-  const { cartItems } = useCart();
+  const { cartItems, clearCart } = useCart();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -19,6 +25,9 @@ export default function CheckoutPage() {
     secondaryPhone: "",
 
     address: "",
+    latitude: "",
+    longitude: "",
+    preferredPamentDate: "",
     city: "",
     region: "",
     postalCode: "",
@@ -91,37 +100,60 @@ export default function CheckoutPage() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      const orderData = {
-        items: cartItems.map((item) => ({
-          name: item.product.name,
-          price: item.product.price,
-          quantity: item.quantity,
-          image: item.product.image,
-        })),
-        customerDetails: {
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          email: formData.email,
-          primaryPhone: formData.primaryPhone,
-          secondaryPhone: formData.secondaryPhone,
-        },
-        deliveryInfo: {
-          address: formData.address,
-          city: formData.city,
-          region: formData.region,
-          postalCode: formData.postalCode,
-        },
-        subtotal: total,
-        shipping: 100,
-        tax: total * 0.1,
-        total: total + 100 + total * 0.1,
-      };
+      try {
+        // Log the cart items for debugging
+        console.log("Cart Items:", cartItems);
 
-      const encodedOrder = encodeURIComponent(JSON.stringify(orderData));
-      router.push(`/order-summary?order=${encodedOrder}`);
+        const orderData = {
+          client: {
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            email: formData.email,
+            primaryPhone: formData.primaryPhone,
+            secondaryPhone: formData.secondaryPhone || "", // Ensure empty string if null
+            address: formData.address,
+            city: formData.city,
+            region: formData.region,
+            postalCode: formData.postalCode,
+            latitude: formData.latitude || "",
+            longitude: formData.longitude || "",
+            preferredPaymentDate: formData.preferredPamentDate || "01",
+          },
+          items: cartItems.map((item) => ({
+            id: item.id,
+            title: item.product.name,
+            price: item.product.price,
+            quantity: item.quantity,
+            imageUrl: item.product.imageUrl || null, // Handle empty image URLs
+          })),
+          orderInfo: {
+            orderDate: getCurrentDate(),
+            orderNumber: generateOrderNumber(),
+          },
+          payments: [],
+          subtotal: total,
+          shipping: 0,
+          tax: total * 0.15, // 15% tax
+          // total: total + 0 + total * 0.15,
+          total: total,
+          status: "pending",
+        };
+
+        // Log the final order data before sending
+        console.log("Order Data:", orderData);
+
+        const orderRef = await addDoc(collection(db, "orders"), orderData);
+        console.log("Order created with ID:", orderRef.id);
+
+        const encodedOrder = encodeURIComponent(JSON.stringify(orderData));
+        router.push(`/order-summary?order=${encodedOrder}`);
+      } catch (error) {
+        console.error("Error processing order:", error);
+        alert("There was an error processing your order. Please try again.");
+      }
     } else {
       alert("Please fill in all required fields correctly");
     }

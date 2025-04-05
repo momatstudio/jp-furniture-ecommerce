@@ -7,10 +7,10 @@ export default function DisplayProduct({ product }: Product) {
     <div className="w-full md:w-1/2">
       <div className="relative aspect-square w-full">
         <Image
-          src={product.image}
+          src={product.imageUrl}
           alt={product.name}
           fill
-          className="object-cover rounded-lg"
+          className="object-cover"
         />
       </div>
     </div>

@@ -8,7 +8,7 @@ interface ProductProps {
   product: {
     name: string;
     price: number;
-    image: string;
+    imageUrl: string;
     slug: string;
   };
 }
@@ -27,7 +27,7 @@ export default function Product({ product }: ProductProps) {
         alt="product"
         width={250}
         height={250}
-        src={product.image}
+        src={product.imageUrl}
         className="object-contain"
       />
       <span className="text-center mt-auto">{product.name}</span>

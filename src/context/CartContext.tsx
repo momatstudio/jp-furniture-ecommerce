@@ -3,17 +3,18 @@ import { createContext, useContext, useState, useEffect } from "react";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 type Product = {
+  id: string;
   slug: string;
   name: string;
   price: number;
-  image: string;
+  imageUrl: string;
 };
 
 type CartItem = {
   id: string;
   name: string;
   price: number;
-  image: string;
+  imageUrl: string;
   quantity: number;
   product: Product;
 };
@@ -76,7 +77,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           id: product.slug,
           name: product.name,
           price: product.price,
-          image: product.image,
+          imageUrl: product.imageUrl,
           quantity,
           product: product,
         },

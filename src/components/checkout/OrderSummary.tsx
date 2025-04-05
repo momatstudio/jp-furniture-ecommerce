@@ -26,9 +26,9 @@ export default function OrderSummary({
                 key={item.product.slug}
                 className="flex items-center space-x-4 py-2 border-gray-400 border-b-1 last:border-b-0"
               >
-                <div className="relative w-20 h-20 flex-shrink-0">
+                <div className="relative w-10 h-10 flex-shrink-0">
                   <Image
-                    src={item.product.image}
+                    src={item.product.imageUrl}
                     alt={item.product.name}
                     fill
                     className="object-cover rounded"
