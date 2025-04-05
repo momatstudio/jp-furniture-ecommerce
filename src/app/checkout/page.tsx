@@ -16,7 +16,7 @@ import { db } from "@/config/firebase";
 import { generateOrderNumber, getCurrentDate } from "../actions";
 
 export default function CheckoutPage() {
-  const { cartItems, clearCart } = useCart();
+  const { cartItems } = useCart();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",

@@ -32,7 +32,7 @@ interface OrderData {
     orderDate: string;
     orderNumber: string;
   };
-  payments: any[];
+  payments: [];
   subtotal: number;
   shipping: number;
   tax: number;
