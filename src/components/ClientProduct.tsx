@@ -6,7 +6,7 @@ interface ProductProps {
     name: string;
     slug: string;
     price: number;
-    image: string;
+    imageUrl: string;
     description: string;
     category: string;
     inStock: boolean;
