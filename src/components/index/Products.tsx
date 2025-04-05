@@ -23,6 +23,7 @@ export default function Products() {
             <Link href={`/shop/product/${item.slug}`} key={index}>
               <Product
                 product={{
+                  id: item.slug,
                   name: item.name || "Unnamed Product",
                   price: item.price || 0,
                   imageUrl: item.imageUrl || "/default-image.jpg",
