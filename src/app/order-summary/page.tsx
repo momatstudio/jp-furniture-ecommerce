@@ -94,8 +94,8 @@ function OrderSummaryContent() {
     if (paymentMethod === "payfast") {
       // PayFast Configuration
       const paymentData = {
-        merchant_id: "10038071", // Replace with your PayFast merchant ID
-        merchant_key: "r1y2ikfcgyd80", // Replace with your PayFast merchant key
+        merchant_id: process.env.NEXT_PUBLIC_PAYFAST_MERCHANT_ID,
+        merchant_key: process.env.NEXT_PUBLIC_PAYFAST_MERCHANT_KEY,
         amount: orderData.total.toFixed(2),
         item_name: `Order ${orderData.orderInfo.orderNumber}`,
         name_first: orderData.client.firstName,
@@ -110,7 +110,7 @@ function OrderSummaryContent() {
       // Create and submit form
       const form = document.createElement("form");
       form.method = "POST";
-      form.action = "https://sandbox.payfast.co.za/eng/process"; // Use https://www.payfast.co.za/eng/process for production
+      form.action = "https://sandbox.payfast.co.za/eng/process";
 
       Object.entries(paymentData).forEach(([key, value]) => {
         const input = document.createElement("input");
