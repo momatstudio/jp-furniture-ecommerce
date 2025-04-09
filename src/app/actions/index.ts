@@ -4,7 +4,5 @@ export const getCurrentDate = () => {
 };
 
 export const generateOrderNumber = () => {
-  const timestamp = Date.now();
-  const randomNum = Math.floor(Math.random() * 1000);
-  return `${timestamp}-${randomNum}`;
+  return `JP-${Math.floor(10000 + Math.random() * 90000)}`;
 };

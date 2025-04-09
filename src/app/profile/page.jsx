@@ -43,7 +43,7 @@ export default async function ProfileServer() {
                     </h1>
                     <p className="text-gray-600 mt-1">{user.email}</p>
                     <div className="mt-4 flex flex-wrap gap-2 justify-center sm:justify-start">
-                      <span className="px-3 py-1 text-xs font-medium bg-purple-100 text-purple-600 rounded-full">
+                      <span className="px-3 py-1 text-xs font-medium bg-purple-100 text-gray-400 rounded-full">
                         Verified Customer
                       </span>
                       <span className="px-3 py-1 text-xs font-medium bg-green-100 text-green-600 rounded-full">
@@ -64,7 +64,7 @@ export default async function ProfileServer() {
                           key={tab}
                           className={`py-4 px-1 border-b-2 ${
                             tab === "Shipping Information"
-                              ? "border-purple-500 text-purple-600"
+                              ? "border-gray-400 text-gray-500"
                               : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
                           } font-medium text-sm`}
                         >

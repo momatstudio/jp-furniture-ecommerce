@@ -12,7 +12,7 @@ import { useCart } from "@/context/CartContext";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { addDoc, collection } from "firebase/firestore";
-import { db } from "@/config/firebase";
+import { db } from "@/lib/firebase";
 import { generateOrderNumber, getCurrentDate } from "../actions";
 
 export default function CheckoutPage() {
