@@ -8,22 +8,23 @@ import ClientCart from "@/components/ClientCart";
 import { CiPhone, CiSearch } from "react-icons/ci";
 import { motion } from "framer-motion";
 import { BiPhoneCall } from "react-icons/bi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
 
-  addEventListener(
-    "scroll",
-    () => {
+  useEffect(() => {
+    const handleScroll = () => {
       if (window.scrollY > 100) {
         setScrolled(true);
       } else {
         setScrolled(false);
       }
-    },
-    []
-  );
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <header className="w-full fixed top-0 z-50">
