@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 
 export default function CartItemsCalculations({ total }: { total: number }) {
   const router = useRouter();
+
   return (
     <div className="lg:w-1/3">
       <div className="bg-gray-50 p-4 rounded">

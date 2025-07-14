@@ -21,8 +21,8 @@ export default function ClientLoginButton() {
         >
           <img
             src={user?.picture || "/default-avatar.png"}
-            // width={25}
-            height={25}
+            // width={30}
+            height={30}
             className="rounded-full"
             alt={user?.name || "User avatar"}
           />
@@ -31,7 +31,7 @@ export default function ClientLoginButton() {
         <button className="hidden md:flex items-center text-sm cursor-pointer hover:text-[#A42300] py-2 ml-4">
           <CiUser
             className="mx-1"
-            size={22}
+            size={25}
             onClick={() => router.push("/api/auth/login")}
           />
         </button>

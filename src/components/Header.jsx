@@ -1,69 +1,112 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { companyInfo } from "../../data";
-import ClientLoginButton from "@/components/ClientLoginButton";
+import { ClientLoginButton, Menu } from "@/components/";
 import ClientCart from "@/components/ClientCart";
-import { CiMenuBurger, CiPhone, CiSearch } from "react-icons/ci";
+import { CiPhone, CiSearch } from "react-icons/ci";
+import { motion } from "framer-motion";
+import { BiPhoneCall } from "react-icons/bi";
+import { useState } from "react";
 
 export default function Header() {
+  const [scrolled, setScrolled] = useState(false);
+
+  addEventListener(
+    "scroll",
+    () => {
+      if (window.scrollY > 100) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    },
+    []
+  );
+
   return (
-    <div className="fixed w-full z-50 top-0">
-      <div className="flex items-center justify-between h-[85px] bg-white p-4 md:px-[15%] ">
-        {/* <ul className="hidden md:flex space-x-4  text-sm font-[300]">
-          <li className="flex items-center h-26 hover:text-[#A42300] cursor-pointer hover:underline">
-            <Link href="/">
-              <b>Home</b>
-            </Link>
-          </li>
-          <li className="flex items-center h-26  hover:text-[#A42300] cursor-pointer hover:underline">
-            <Link href="/shop">
-              <b>Shop</b>
-            </Link>
-          </li>
-          <li className="flex items-center h-26  hover:text-[#A42300] cursor-pointer hover:underline">
-            <Link href="/about">
-              <b>About</b>
-            </Link>
-          </li>
-          <li className="flex items-center h-26  hover:text-[#A42300] cursor-pointer hover:underline">
-            <Link href="/contact">
-              <b>Contact</b>
-            </Link>
-          </li>
-        </ul> */}
-        <Link href={`tel:${companyInfo.phone}`}>
-          <div className="flex items-center font-[200] text-black">
-            <CiPhone className="mr-2 hover:text-[#A42300] text-[25px] md:text-[20px]" />
-            <span className="hidden md:block">{companyInfo.phone}</span>
-            <span className=" md:hidden">CALL US</span>
+    <header className="w-full fixed top-0 z-50">
+      {/* 🔔 Top Announcement Bar */}
+      <div className="bg-[#A42300] text-white text-sm font-bold py-2 px-4 overflow-hidden">
+        <motion.div
+          className="whitespace-nowrap"
+          initial={{ x: "100%" }}
+          animate={{ x: "-100%" }}
+          transition={{ repeat: Infinity, duration: 40, ease: "linear" }}
+        >
+          🚚 FREE DELIVERY ON ALL ORDERS — SHOP NOW, TAKE ON CREDIT, & GET
+          CUSTOM FURNITURE MADE JUST FOR YOU! 🛋️✨
+        </motion.div>
+      </div>
+
+      {/* 🧭 Main Navigation */}
+      <div
+        className={`flex items-center justify-between h-[120px] px-4 md:px-[15%] shadow-sm ${
+          scrolled ? "bg-white" : "bg-transparent"
+        } transition-all duration-300`}
+      >
+        {/* Phone Contact */}
+        <Link href={`tel:${companyInfo.phone}`} aria-label="Call us">
+          <div
+            className={`flex items-center  text-sm font-light hover:text-[#A42300] transition ${
+              scrolled ? "text-black" : "text-white"
+            }`}
+          >
+            <BiPhoneCall size={25} className="mr-2 md:text-[20px]" />
+            <span className="hidden md:inline">{companyInfo.phone}</span>
+            <span className="md:hidden">CALL US</span>
           </div>
         </Link>
 
-        <div className=" absolute top-0 left-1/2 transform -translate-x-1/2">
-          <Link href="/">
+        <div className="absolute left-1/2 transform -translate-x-1/2">
+          <Link
+            href="/"
+            aria-label="JP Furniture Home"
+            className="flex flex-col items-center text-center"
+          >
             <Image
-              src={"/logo1.svg"}
-              height={70 / 1.6}
-              width={143 / 1.6}
-              alt={"JP Furniture logo"}
-              className=" cursor-pointer rounded-full"
+              src="/logo1.svg"
+              width={55}
+              height={55}
+              alt="JP Furniture Logo"
+              className="cursor-pointer rounded-full"
+              priority
             />
+            <h4
+              className={`mt-1 text-[18px] font-extrabold tracking-wide uppercase ${
+                scrolled ? "text-[#A42300]" : "text-white"
+              }`}
+              style={{ fontFamily: "'Playfair Display', serif" }}
+            >
+              J.P FURNITURE
+            </h4>
+            {/* Optional Tagline */}
+            {/* <p
+              className="text-[11px] text-gray-500 tracking-wide"
+              style={{ fontFamily: "'Poppins', sans-serif" }}
+            >
+              Elegant. Affordable. Yours.
+            </p> */}
           </Link>
         </div>
 
-        <div className=" flex items-center text-black cursor-pointer">
+        {/* Right Controls */}
+        <div
+          className={`flex items-center space-x-4 ${
+            scrolled ? "text-black" : "text-white"
+          }`}
+        >
           <CiSearch
-            size={22}
-            className="hidden md:block hover:text-[#A42300]"
+            size={25}
+            className="hidden md:block hover:text-[#A42300] cursor-pointer"
+            aria-label="Search"
           />
           <ClientLoginButton />
           <ClientCart />
-          <div className=" flex ml-6">
-            <CiMenuBurger className="text-[25px] md:text-[20px]" />
-            <span className="hidden md:block ml-2">MENU</span>
-          </div>
+          <Menu />
         </div>
       </div>
-    </div>
+    </header>
   );
 }

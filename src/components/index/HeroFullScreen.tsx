@@ -4,21 +4,26 @@ import Button from "../Button";
 
 export default function HeroFullScreen() {
   return (
-    <div
-      className=" bg-[#ffe2da] bg-no-repeat bg-cover bg-center w-full h-screen"
+    <section
+      className="relative w-full h-screen bg-cover bg-center"
       style={{ backgroundImage: `url(${slideShow[0].image})` }}
+      role="banner"
     >
-      <div className="flex flex-col justify-center items-center md:items-start text-white px-4 md:px-0 md:mx-[15%] h-full">
-        <h1 className="absolute font-bold text-5xl leading-[60px] left-0 right-0 text-center">
-          Furniture
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/40 z-10" />
+
+      {/* Content */}
+      <div className="relative z-20 flex flex-col justify-center items-center md:items-start h-full px-6 md:px-[15%] text-white text-center md:text-left">
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight max-w-4xl animate-fadeIn pt-10">
+          Discover Exquisite Quality Furniture for Your Home
         </h1>
-        <div className="absolute flex justify-center  bottom-20 left-0 right-0 ">
-          <Button name="SHOP NOW" color={"#ffffff"} route="/shop" />
-          <div className="hidden md:block">
-            <Button name="CONTACT US" color={"#ffffff"} route="/contact" />
-          </div>
+
+        {/* Buttons */}
+        <div className="mt-10 flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center md:justify-start">
+          <Button name="SHOP NOW" color="#ffffff" route="/shop" />
+          <Button name="CONTACT US" color="#ffffff" route="/contact" />
         </div>
       </div>
-    </div>
+    </section>
   );
 }

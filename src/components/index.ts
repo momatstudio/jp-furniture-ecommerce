@@ -23,6 +23,8 @@ import UniqueProduct from "./product/UniqueProduct";
 import UniqueProductSpecs from "./product/UniqueProductSpecs";
 
 // General components
+import Menu from "./Menu";
+import ClientLoginButton from "./ClientLoginButton";
 import Title from "./Title";
 import Header from "./Header";
 import HeaderLite from "./HeaderLite";
@@ -36,5 +38,13 @@ export { OrderSummary, PaymentMethods, ShippingForm };
 export { Footer };
 export { Hero, HeroFullScreen, ProductAd, Products };
 export { DisplayProduct, ProductSummary, UniqueProduct, UniqueProductSpecs };
-export { Breadcrumb, Button, LayoutComponent, Product, Title };
+export {
+  Breadcrumb,
+  Button,
+  LayoutComponent,
+  Product,
+  Title,
+  Menu,
+  ClientLoginButton,
+};
 export { Header, HeaderLite };
